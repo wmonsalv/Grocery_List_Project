@@ -1,10 +1,16 @@
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
+
+  function listInputHandler() {}
+
+  function addItemHandler(){}
+
+
   return (
     <View style={styles.container}>
       <View style = {styles.inputContainer}>
-        <TextInput style = {styles.textInput} placeholder = "Add Item to the list"/>
+        <TextInput style = {styles.textInput} onChange = {listInputHandler} placeholder = "Add Item to the list"/>
         <Button title="Add Item"/>
       </View>
       <View style = {styles.listContainer}>
@@ -24,7 +30,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingBottom : 24,
+    marginBottom : 24,
     borderBottomWidth: 1,
     borderBottomColor: "#1e90ff",
     flex : 1
@@ -36,6 +42,6 @@ const styles = StyleSheet.create({
     padding : 8
   },
   listContainer: {
-    flex : 4
+    flex : 5
   }
 });
