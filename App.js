@@ -7,7 +7,7 @@ export default function App() {
         <TextInput style = {styles.textInput} placeholder = "Add Item to the list"/>
         <Button title="Add Item"/>
       </View>
-      <View>
+      <View style = {styles.listContainer}>
         <Text>Grocery List</Text>
       </View>
     </View>
@@ -16,15 +16,26 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 50,
+    flex : 1,
+    paddingTop: 50,
+    paddingHorizontal: 16
   },
   inputContainer:{
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom : 24,
+    borderBottomWidth: 1,
+    borderBottomColor: "#1e90ff",
+    flex : 1
   },
   textInput:{
     borderWidth : 1,
     borderColor: '#cccccc',
-    width : "80%",
+    width : "70%",
+    padding : 8
   },
+  listContainer: {
+    flex : 4
+  }
 });
