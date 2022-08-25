@@ -1,19 +1,26 @@
+import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
 
-  function listInputHandler() {}
+  const [enteredItemText, setEnteredItemText] = useState("")
 
-  function addItemHandler(){}
+  function listInputHandler(enteredText) {
+    setEnteredItemText(enteredText)
+  }
+
+  function addItemHandler() { 
+    console.log(enteredItemText)
+  }
 
 
   return (
     <View style={styles.container}>
-      <View style = {styles.inputContainer}>
-        <TextInput style = {styles.textInput} onChange = {listInputHandler} placeholder = "Add Item to the list"/>
-        <Button title="Add Item"/>
+      <View style={styles.inputContainer}>
+        <TextInput style={styles.textInput} onChange={listInputHandler} placeholder="Add Item to the list" />
+        <Button title="Add Item" onPress={addItemHandler}/>
       </View>
-      <View style = {styles.listContainer}>
+      <View style={styles.listContainer}>
         <Text>Grocery List</Text>
       </View>
     </View>
@@ -22,26 +29,26 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex : 1,
+    flex: 1,
     paddingTop: 50,
     paddingHorizontal: 16
   },
-  inputContainer:{
+  inputContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom : 24,
+    marginBottom: 24,
     borderBottomWidth: 1,
     borderBottomColor: "#1e90ff",
-    flex : 1
+    flex: 1
   },
-  textInput:{
-    borderWidth : 1,
+  textInput: {
+    borderWidth: 1,
     borderColor: '#cccccc',
-    width : "70%",
-    padding : 8
+    width: "70%",
+    padding: 8
   },
   listContainer: {
-    flex : 5
+    flex: 5
   }
 });
