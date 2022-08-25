@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
 
@@ -14,8 +14,10 @@ export default function App() {
   }
 
   function addItemHandler() {
-    setListofItems((currentListOfItems) => [...currentListOfItems, enteredItemText]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+    setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
   }
+  //every item in my array is now an object with these attributes, entered text and a key
+  //At the bottom, we have to do itemData.item.text to access the data attribute of the object
 
 
   return (
@@ -25,13 +27,13 @@ export default function App() {
         <Button title="Add Item" onPress={addItemHandler} />
       </View>
       <View style={styles.listContainer}>
-        <ScrollView alwaysBounceVertical={false}>
-          {listOfItems.map((eachItem) => (
-            <View key={eachItem} style={styles.itemListStyles} >
-              <Text style={styles.textFontColor}>{eachItem}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
+          return (<View style={styles.itemListStyles} >
+            <Text style={styles.textFontColor}>{itemData.item.text}</Text> 
+          </View>)
+        }}>
+
+        </FlatList>
       </View>
     </View>
   );
