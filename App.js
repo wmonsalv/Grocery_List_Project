@@ -16,6 +16,7 @@ export default function App() {
 
   function addItemHandler() {
     setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+    setEnteredItemText("")
   }
   //every item in my array is now an object with these attributes, entered text and a key
   //At the bottom, we have to do itemData.item.text to access the data attribute of the object
@@ -24,14 +25,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} onChangeText={listInputHandler} placeholder="Add Item to the list" />
+        <TextInput value={enteredItemText} style={styles.textInput} onChangeText={listInputHandler} placeholder="Add Item to the list" />
         <Button title="Add Item" onPress={addItemHandler} />
       </View>
       <View style={styles.listContainer}>
         <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
           return (<GroceryItem text={itemData.item.text}/>)
         }}>
-
         </FlatList>
       </View>
     </View>
