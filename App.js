@@ -12,14 +12,15 @@ export default function App() {
   }
 
   function addItemHandler() { 
-    setListofItems((currentListOfItems) => [...currentListOfItems, enteredItemText]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+    setListofItems((currentListOfItems) => [...currentListOfItems, enteredItemText]
+    ) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
   }
 
 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.textInput} onChange={listInputHandler} placeholder="Add Item to the list" />
+        <TextInput style={styles.textInput} onChangeText={listInputHandler} placeholder="Add Item to the list" />
         <Button title="Add Item" onPress={addItemHandler}/>
       </View>
       <View style={styles.listContainer}>
