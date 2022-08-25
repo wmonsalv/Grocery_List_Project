@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-nat
 
 export default function App() {
 
+  //let myVariableId = Math.random() 
+
   const [enteredItemText, setEnteredItemText] = useState("")
 
   const [listOfItems, setListofItems] = useState([])
@@ -25,7 +27,7 @@ export default function App() {
       <View style={styles.listContainer}>
         <ScrollView>
           {listOfItems.map((eachItem) => (
-            <View key={eachItem} style={styles.itemListStyles} >
+            <View key={key} style={styles.itemListStyles} >
               <Text style={styles.textFontColor}>{eachItem}</Text>
             </View>
           ))}
