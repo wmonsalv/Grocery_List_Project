@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, View, Button, TextInput, FlatList } from 'react-native';
+import GroceryItem from './components/GroceryItem';
 
 export default function App() {
 
@@ -28,9 +29,7 @@ export default function App() {
       </View>
       <View style={styles.listContainer}>
         <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
-          return (<View style={styles.itemListStyles} >
-            <Text style={styles.textFontColor}>{itemData.item.text}</Text> 
-          </View>)
+          return (<GroceryItem text={itemData.item.text}/>)
         }}>
 
         </FlatList>
@@ -62,15 +61,5 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 5
-  },
-  itemListStyles: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: "#1e90ff",
-    color: "white",
-  },
-  textFontColor: {
-    color: "white",
   }
 });
