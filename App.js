@@ -25,9 +25,9 @@ export default function App() {
         <Button title="Add Item" onPress={addItemHandler} />
       </View>
       <View style={styles.listContainer}>
-        <ScrollView>
+        <ScrollView alwaysBounceVertical={false}>
           {listOfItems.map((eachItem) => (
-            <View key={key} style={styles.itemListStyles} >
+            <View key={eachItem} style={styles.itemListStyles} >
               <Text style={styles.textFontColor}>{eachItem}</Text>
             </View>
           ))}
