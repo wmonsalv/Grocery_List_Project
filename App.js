@@ -12,8 +12,7 @@ export default function App() {
   }
 
   function addItemHandler() { 
-    setListofItems((currentListOfItems) => [...currentListOfItems, enteredItemText]
-    ) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+    setListofItems((currentListOfItems) => [...currentListOfItems, enteredItemText]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
   }
 
 
@@ -21,10 +20,16 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput style={styles.textInput} onChangeText={listInputHandler} placeholder="Add Item to the list" />
-        <Button title="Add Item" onPress={addItemHandler}/>
+        <Button title="Add Item" onPress={addItemHandler} />
       </View>
       <View style={styles.listContainer}>
-        {listOfItems.map((eachItem) => <Text>{eachItem}</Text>)}
+        {listOfItems.map((eachItem) => (
+          <View key={eachItem} style={styles.itemListStyles} >
+            <Text style={styles.textFontColor}>
+              {eachItem}
+            </Text>
+          </View>
+        ))}
       </View>
     </View>
   );
@@ -53,5 +58,15 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 5
+  },
+  itemListStyles: {
+    margin : 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: "#1e90ff",
+    color : "white",
+  },
+  textFontColor: {
+    color : "white",
   }
 });
