@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
 
@@ -11,7 +11,7 @@ export default function App() {
     setEnteredItemText(enteredText)
   }
 
-  function addItemHandler() { 
+  function addItemHandler() {
     setListofItems((currentListOfItems) => [...currentListOfItems, enteredItemText]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
   }
 
@@ -23,13 +23,13 @@ export default function App() {
         <Button title="Add Item" onPress={addItemHandler} />
       </View>
       <View style={styles.listContainer}>
-        {listOfItems.map((eachItem) => (
-          <View key={eachItem} style={styles.itemListStyles} >
-            <Text style={styles.textFontColor}>
-              {eachItem}
-            </Text>
-          </View>
-        ))}
+        <ScrollView>
+          {listOfItems.map((eachItem) => (
+            <View key={eachItem} style={styles.itemListStyles} >
+              <Text style={styles.textFontColor}>{eachItem}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
@@ -60,13 +60,13 @@ const styles = StyleSheet.create({
     flex: 5
   },
   itemListStyles: {
-    margin : 8,
+    margin: 8,
     padding: 8,
     borderRadius: 6,
     backgroundColor: "#1e90ff",
-    color : "white",
+    color: "white",
   },
   textFontColor: {
-    color : "white",
+    color: "white",
   }
 });
