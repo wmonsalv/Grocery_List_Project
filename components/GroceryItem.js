@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from "react-native"
 
+
 function GroceryItem(props) {
     return <View style={styles.itemListStyles} >
         <Text style={styles.textFontColor}>{props.text}</Text>
