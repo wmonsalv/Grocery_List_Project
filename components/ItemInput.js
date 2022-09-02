@@ -10,11 +10,16 @@ function ItemInput(props) {
         setEnteredItemText(enteredText)
     }
 
+    function addInputHandler(){
+        props.onAddInput(enteredItemText)
+        setEnteredItemText("")
+    }
+
     return (
 
         <View style={styles.inputContainer}>
             <TextInput value={enteredItemText} style={styles.textInput} onChangeText={listInputHandler} placeholder="Add Item to the list" />
-            <Button title="Add Item" onPress={props.onAddItem} />
+            <Button title="Add Item" onPress={addInputHandler} />
         </View>
     )
 

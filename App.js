@@ -7,15 +7,10 @@ export default function App() {
 
   //let myVariableId = Math.random() 
 
-  
-
   const [listOfItems, setListofItems] = useState([])
 
- 
-
-  function addItemHandler() {
+  function addItemHandler(enteredItemText) {
     setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
-    setEnteredItemText("")
   }
   //every item in my array is now an object with these attributes, entered text and a key
   //At the bottom, we have to do itemData.item.text to access the data attribute of the object
