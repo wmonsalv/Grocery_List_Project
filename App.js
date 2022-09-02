@@ -12,16 +12,22 @@ export default function App() {
   function addItemHandler(enteredItemText) {
     setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
   }
+
   //every item in my array is now an object with these attributes, entered text and a key
   //At the bottom, we have to do itemData.item.text to access the data attribute of the object
 
+  function deleteItemHandler(){
+    console.log("delete")
+  }
+
+  //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
 
   return (
     <View style={styles.container}>
       <ItemInput onAddInput={addItemHandler}/>
       <View style={styles.listContainer}>
         <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
-          return (<GroceryItem text={itemData.item.text}/>)
+          return (<GroceryItem text={itemData.item.text} onDelete={deleteItemHandler}/>)
         }}>
         </FlatList>
       </View>

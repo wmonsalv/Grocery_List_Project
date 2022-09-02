@@ -1,10 +1,15 @@
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, View, Text, Pressable } from "react-native"
 
+//The data from the app component is passed down onto the onPress attribute on pressable through props
 
 function GroceryItem(props) {
-    return <View style={styles.itemListStyles} >
+    return(
+        <Pressable onPress={props.onDelete}>
+        <View style={styles.itemListStyles} >
         <Text style={styles.textFontColor}>{props.text}</Text>
-    </View>
+        </View>
+        </Pressable>
+    ) 
 }
 
 export default GroceryItem
