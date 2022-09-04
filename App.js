@@ -5,12 +5,12 @@ import ItemInput from './components/ItemInput';
 
 export default function App() {
 
-  //let myVariableId = Math.random() 
-
   const [listOfItems, setListofItems] = useState([])
 
   function addItemHandler(enteredItemText) {
+   
     setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+
   }
 
   //every item in my array is now an object with these attributes, entered text and a key

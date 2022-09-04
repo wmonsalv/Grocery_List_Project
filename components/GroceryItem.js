@@ -3,13 +3,19 @@ import { StyleSheet, View, Text, Pressable } from "react-native"
 //The data from the app component is passed down onto the onPress attribute on pressable through props
 
 function GroceryItem(props) {
-    return(
-        <Pressable onPress={props.onDelete.bind(this, props.text)}>
+    return (
+
         <View style={styles.itemListStyles} >
-        <Text style={styles.textFontColor}>{props.text}</Text>
+            <Pressable
+                android_ripple={{color: "#4682B4"}}
+                onPress={props.onDelete.bind(this, props.text)}
+                style = {({pressed}) => pressed && styles.pressedItem}
+                >
+                <Text style={styles.textFontColor}>{props.text}</Text>
+            </Pressable>
         </View>
-        </Pressable>
-    ) 
+
+    )
 }
 
 export default GroceryItem
@@ -21,8 +27,12 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         backgroundColor: "#1e90ff",
         color: "white",
-      },
-      textFontColor: {
+    },
+    pressedItem: {
+        opacity: 0.5,
+        color: "red"
+    },
+    textFontColor: {
         color: "white",
-      }
+    }
 })
