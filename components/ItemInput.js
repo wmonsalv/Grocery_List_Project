@@ -30,7 +30,7 @@ function ItemInput(props) {
                  <Button title="Add Item" onPress={addInputHandler} />
                  </View>
                  <View style={styles.button}>
-                 <Button title="Cancel"/>
+                 <Button onPress={props.onCancel} title="Cancel"/>
                  </View>
                  </View>
             
@@ -49,15 +49,17 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         borderBottomWidth: 1,
         borderBottomColor: "#1e90ff",
-        flex: 1
+        flex: 1,
+        padding: 16
     },
     textInput: {
         borderWidth: 1,
         borderColor: '#cccccc',
-        width: "70%",
+        width: "100%",
         padding: 8
     },
     buttonContainer: {
+        marginTop: 16,
         flexDirection: "row"
     }, 
     button: {

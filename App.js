@@ -13,9 +13,14 @@ export default function App() {
     setModalisVisible(true)
   }
 
+  function endAddItemHandler(){
+    setModalisVisible(false)
+  }
+
   function addItemHandler(enteredItemText) {
    
     setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+    setModalisVisible(false)
 
   }
 
@@ -31,7 +36,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Button title="Add new Item" color="#1e90ff" onPress={startAddItemHandler}/>
-      <ItemInput visible={modalIsVisible} onAddInput={addItemHandler}/>
+      <ItemInput visible={modalIsVisible} onAddInput={addItemHandler} onCancel={endAddItemHandler}/>
       <View style={styles.listContainer}>
         <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
           return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler}/>)
