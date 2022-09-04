@@ -3,6 +3,7 @@ import { useState } from "react"
 
 //we used props to pass over the state change from the app component into the ItemInput component (i.e., props.onAddItem)
 // Just rememeber that we can't style the button components offered by react native. If we want a particular style, then we have to create our own.
+// Images in native are not linked to file in the same way we would do in html or react. Here, we use require, and then the relative file path. I used Two dots before the file path because we are having to move two levels up (file wise) to get to the folder that holds my image
 
 function ItemInput(props) {
 
