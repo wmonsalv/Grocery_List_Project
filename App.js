@@ -16,8 +16,8 @@ export default function App() {
   //every item in my array is now an object with these attributes, entered text and a key
   //At the bottom, we have to do itemData.item.text to access the data attribute of the object
 
-  function deleteItemHandler(){
-    setListofItems( currentListOfItems => { return currentListOfItems.filter( (item) => item.id !== id) })
+  function deleteItemHandler(text){
+    setListofItems(currentListOfItems => { return currentListOfItems.filter((item) => item.text !== text)})
   }
 
   //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
@@ -27,7 +27,7 @@ export default function App() {
       <ItemInput onAddInput={addItemHandler}/>
       <View style={styles.listContainer}>
         <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
-          return (<GroceryItem text={itemData.item.text} id={itemData.item.id} onDelete={deleteItemHandler}/>)
+          return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler}/>)
         }}>
         </FlatList>
       </View>

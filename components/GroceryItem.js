@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Pressable } from "react-native"
 
 function GroceryItem(props) {
     return(
-        <Pressable onPress={props.onDelete.bind(this, props.id)}>
+        <Pressable onPress={props.onDelete.bind(this, props.text)}>
         <View style={styles.itemListStyles} >
         <Text style={styles.textFontColor}>{props.text}</Text>
         </View>
