@@ -1,4 +1,4 @@
-import { View, TextInput, Button, StyleSheet, Modal } from "react-native"
+import { View, TextInput, Button, StyleSheet, Modal, Image } from "react-native"
 import { useState } from "react"
 
 //we used props to pass over the state change from the app component into the ItemInput component (i.e., props.onAddItem)
@@ -20,6 +20,7 @@ function ItemInput(props) {
 
         <Modal animationType="slide" visible={props.visible}>
         <View style={styles.inputContainer}>
+        <Image style={styles.image} source={require("../assets/images/groceryBasket.jpg")}/>
             <TextInput
                  value={enteredItemText} 
                  style={styles.textInput} 
@@ -65,5 +66,10 @@ const styles = StyleSheet.create({
     button: {
         marginHorizontal: 8,
         width: 100
+    },
+    image: {
+        width: 100, 
+        height: 100,
+        margin: 20
     }
 })
