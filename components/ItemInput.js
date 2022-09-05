@@ -27,7 +27,7 @@ function ItemInput(props) {
                  value={enteredItemText} 
                  style={styles.textInput} 
                  onChangeText={listInputHandler} 
-                 placeholder="Add Item to the list" />
+                 placeholder={props.placeHolderChanger} />
                  <View style={styles.buttonContainer}>
                 <View style={styles.button}>
                  <PaperComponent title="Add Item" textColor="white" onPress={addInputHandler}/>

@@ -18,13 +18,19 @@ export default function App() {
     setModalisVisible(false)
   }
 
+  const [placeholder, setPlaceHolder] = useState("Add Item to the list")
+
+  //This placeholder state editor above is tho display a different message if an empty string is submitted by the user
+
   function addItemHandler(enteredItemText) {
    
     if(enteredItemText !== ""){
       setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
       setModalisVisible(false)
-    } 
-
+      setPlaceHolder("Add Item to the list")
+    } else{
+      setPlaceHolder("Please type the name of an item")
+    }
   }
 
   //every item in my array is now an object with these attributes, entered text and a key
@@ -39,7 +45,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Button title="Add new Item" color="#1e90ff" onPress={startAddItemHandler}/>
-      <ItemInput visible={modalIsVisible} onAddInput={addItemHandler} onCancel={endAddItemHandler}/>
+      <ItemInput placeHolderChanger={placeholder} visible={modalIsVisible} onAddInput={addItemHandler} onCancel={endAddItemHandler}/>
       <View style={styles.listContainer}>
         <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
           return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler}/>)
