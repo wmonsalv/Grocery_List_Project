@@ -1,10 +1,19 @@
 import Main from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Main.js";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Home.js";
 
 export default function App() {
 
-  return (
-      <Main/>
-   )
-  
+    const Stack = createNativeStackNavigator();
 
+        return (
+            // <NavigationContainer>
+            //     <Stack.Navigator>
+            //         <Stack.Screen name="Home" component={Home} />
+            //     </Stack.Navigator>
+            // </NavigationContainer>
+            <Home/>
+        );
+   
   }

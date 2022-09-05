@@ -1,11 +1,36 @@
-import { Image, View } from "react-native"
+import { Image, View, Text, StyleSheet } from "react-native"
 
 
 function Home() {
 
-    <Image source={require("/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/assets/images/Shopping List.png")}/>
+    const word = "hello"
+
+    return(
+
+        <View style={styles.Background}>
+        <Image style={styles.imageEdit} source={require("/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/assets/images/ShoppingList.png")}/>
+        </View>
+
+    )
+    
+    
+   
 
 
 }
 
+const styles = StyleSheet.create({
+    imageEdit: {
+        justifyContent: 'center',
+    },
+    Background: {
+        justifycontent:"center",
+        alignItems: 'center',
+        backgroundColor: "#27963C",
+        height: "100%",
+        widht: "100"
+
+    }})
+
 export default Home
+
