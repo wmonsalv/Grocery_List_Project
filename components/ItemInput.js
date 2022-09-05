@@ -1,5 +1,6 @@
 import { View, TextInput, Button, StyleSheet, Modal, Image } from "react-native"
 import { useState } from "react"
+import PaperComponent from "./PaperComponent"
 
 //we used props to pass over the state change from the app component into the ItemInput component (i.e., props.onAddItem)
 // Just rememeber that we can't style the button components offered by react native. If we want a particular style, then we have to create our own.
@@ -29,10 +30,12 @@ function ItemInput(props) {
                  placeholder="Add Item to the list" />
                  <View style={styles.buttonContainer}>
                 <View style={styles.button}>
-                 <Button title="Add Item" onPress={addInputHandler} />
+             
+                 <PaperComponent title="Add Item" textColor="white" onPress={addInputHandler}/>
                  </View>
                  <View style={styles.button}>
-                 <Button onPress={props.onCancel} title="Cancel"/>
+                
+                 <PaperComponent title="Cancel" textColor="white" onPress={props.onCancel} style={{ width: 300 }}/>
                  </View>
                  </View>
             
@@ -63,8 +66,8 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     }, 
     button: {
-        marginHorizontal: 8,
-        width: 100
+        marginHorizontal: 12,
+        width: "45%"
     },
     image: {
         width: 200, 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from 'react-native-paper';
 
 const PaperComponent = (props) => (
-  <Button title={props.title} mode="contained" onPress={props.onPress}/>
+  <Button buttonColor="#1e90ff" mode="contained" onPress={props.onPress}>{props.title}</Button>
 );
 
 export default PaperComponent;
