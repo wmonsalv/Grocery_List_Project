@@ -28,7 +28,8 @@ export default function App() {
       setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
       setModalisVisible(false)
       setPlaceHolder("Add Item to the list")
-    } else{
+    } 
+    else{
       setPlaceHolder("Please type the name of an item")
     }
   }
