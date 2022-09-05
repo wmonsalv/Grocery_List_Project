@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View, Button, TextInput, FlatList } from 'react-native';
 import GroceryItem from './components/GroceryItem';
 import ItemInput from './components/ItemInput';
+import PaperComponent from './components/PaperComponent';
 
 export default function App() {
 

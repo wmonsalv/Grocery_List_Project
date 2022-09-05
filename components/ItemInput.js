@@ -30,11 +30,9 @@ function ItemInput(props) {
                  placeholder="Add Item to the list" />
                  <View style={styles.buttonContainer}>
                 <View style={styles.button}>
-             
                  <PaperComponent title="Add Item" textColor="white" onPress={addInputHandler}/>
                  </View>
                  <View style={styles.button}>
-                
                  <PaperComponent title="Cancel" textColor="white" onPress={props.onCancel} style={{ width: 300 }}/>
                  </View>
                  </View>
