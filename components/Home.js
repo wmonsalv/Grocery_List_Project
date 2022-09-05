@@ -2,22 +2,16 @@ import { Image, View, Text, StyleSheet } from "react-native"
 import HomeButton from "./HomeButton"
 
 
-function Home() {
-
-    const word = "hello"
+function Home({navigation}) {
 
     return(
 
         <View style={styles.Background}>
         <Image style={styles.imageEdit} source={require("/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/assets/images/ShoppingList.png")}/>
-        <HomeButton/>
+        <HomeButton click={() => navigation.navigate("addPage")}/>
         </View>
-        
-
     )
-    
-    
-   
+     
 
 
 }

@@ -8,12 +8,13 @@ export default function App() {
     const Stack = createNativeStackNavigator();
 
         return (
-            // <NavigationContainer>
-            //     <Stack.Navigator>
-            //         <Stack.Screen name="Home" component={Home} />
-            //     </Stack.Navigator>
-            // </NavigationContainer>
-            <Home/>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Home">
+                    <Stack.Screen name="Home" component={Home} />
+                    <Stack.Screen name="addPage" component={Main} />
+                </Stack.Navigator>
+            </NavigationContainer>
+           
         );
    
   }
