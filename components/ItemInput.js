@@ -22,7 +22,7 @@ function ItemInput(props) {
 
         <Modal animationType="slide" visible={props.visible}>
         <View style={styles.inputContainer}>
-        <Image style={styles.image} source={require("../assets/images/groceryBasket.jpg")}/>
+        <Image style={styles.image} source={require("../assets/images/cropped_image_groceries.png")}/>
             <TextInput
                  value={enteredItemText} 
                  style={styles.textInput} 
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
         width: "45%"
     },
     image: {
-        width: 200, 
-        height: 200,
+        width: 250, 
+        height: 250,
         margin: 20
     }
 })
