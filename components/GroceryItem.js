@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         margin: 8,
         padding: 8,
         borderRadius: 6,
-        backgroundColor: "#1e90ff",
+        backgroundColor: "#27963C",
         color: "white",
     },
     pressedItem: {
