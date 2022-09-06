@@ -31,7 +31,8 @@ function addItemHandler(enteredItemText) {
   // I have tried find and some, but I can't get the darn thing from taking in duplicate items
  
   if(enteredItemText !== "" && isNaN(enteredItemText)!==false || listOfItems.some((test)) === true){
-    setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+    let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
+    setListofItems((currentListOfItems) => [...currentListOfItems, { text: withNoDigits, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
     setModalisVisible(false)
     setPlaceHolder("Add Item to the list")
   } 
