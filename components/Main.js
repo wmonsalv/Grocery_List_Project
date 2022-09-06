@@ -23,7 +23,7 @@ const [placeholder, setPlaceHolder] = useState("Add Item to the list")
 
 function addItemHandler(enteredItemText) {
  
-  if(enteredItemText !== "" || listOfItems.find((item) => {item.text !== enteredItemText})){
+  if(enteredItemText !== "" && isNaN(enteredItemText)!==false){
     setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
     setModalisVisible(false)
     setPlaceHolder("Add Item to the list")
