@@ -20,10 +20,17 @@ function endAddItemHandler(){
 const [placeholder, setPlaceHolder] = useState("Add Item to the list")
 
 //This placeholder state editor above is tho display a different message if an empty string is submitted by the user
+//isNan checks if input is a number, returns false if it is 
 
 function addItemHandler(enteredItemText) {
+
+  function test(enteredItemText){
+    return listOfItems.text === enteredItemText.text
+  }
+
+  // I have tried find and some, but I can't get the darn thing from taking in duplicate items
  
-  if(enteredItemText !== "" && isNaN(enteredItemText)!==false){
+  if(enteredItemText !== "" && isNaN(enteredItemText)!==false || listOfItems.some((test)) === true){
     setListofItems((currentListOfItems) => [...currentListOfItems, { text: enteredItemText, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
     setModalisVisible(false)
     setPlaceHolder("Add Item to the list")
