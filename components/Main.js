@@ -63,7 +63,7 @@ function deleteItemHandler(text){
 return (
 
 
-      <SafeAreaView style={{flex:1, backgroundColor: "#fff"}}>
+      <SafeAreaView style={{flex:1, backgroundColor: "#ededed"}}>
       <View style={styles.header}>
         <Text style={{fontWeight: "bold", fontSize: 20, color: "black"}}>
           Shopping List
@@ -72,7 +72,7 @@ return (
       </View>
       <View style={styles.footer}>
         <View style={styles.inputContainer}>
-          <TextInput placeholder="Add an item to your list"/>
+          <TextInput style={styles.textInput} placeholder="Add an item to your list"/>
         </View>
         <TouchableOpacity>
           <View style={styles.iconContainer}>
@@ -136,7 +136,8 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginRight: 20,
     borderRadius: 30,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
+    padding: 5
   },
   iconContainer: {
     backgroundColor: "#fff",
@@ -146,7 +147,16 @@ const styles = StyleSheet.create({
     elevation: 40,
     justifyContent: "center",
     alignContent: "center"
+  },
+  textInput:{
+    backgroundColor: "#fff",
+    borderColor: "#fff",
+    backgroundColor: "#fff",
+    flex: 1,
+    height: 50,
+    paddingHorizontal: 20,
   }
+  
 });
 
 export default Main;
