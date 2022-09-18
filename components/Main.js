@@ -1,5 +1,10 @@
+// import { Icon } from 'react-native-vector-icons';
+//import { style } from '@mui/system';
+
 import { useState } from 'react';
-import { StyleSheet, View, Button, FlatList } from 'react-native';
+import IconOne from './Icons/IconOne';
+import { StyleSheet, View, SafeAreaView, Text, Button, FlatList } from 'react-native';
+import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
 import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/ItemInput.js"
 
@@ -36,7 +41,6 @@ function addItemHandler(enteredItemText) {
   if(enteredItemText !== "" && isNaN(enteredItemText)!==false && !listOfItems.some((item) => {return item.text === enteredItemText})){
     let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
     setListofItems((currentListOfItems) => [...currentListOfItems, { text: withNoDigits, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
-    setModalisVisible(false)
     setPlaceHolder("Add Item to the list")
   } 
   else{
@@ -54,30 +58,82 @@ function deleteItemHandler(text){
 //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
 
 return (
-    <View style={styles.container}>
-    <Button title="Add new Item" color="#1e90ff" onPress={startAddItemHandler}/>
-    <ItemInput placeHolderChanger={placeholder} visible={modalIsVisible} onAddInput={addItemHandler} onCancel={endAddItemHandler}/>
-    <View style={styles.listContainer}>
-      <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
-        return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler}/>)
-      }}>
-      </FlatList>
-    </View>
-  </View>
+
+
+      <SafeAreaView style={{flex:1, backgroundColor: "#fff"}}>
+      <View style={styles.header}>
+        <Text style={{fontWeight: "bold", fontSize: 20, color: "black"}}>
+          Shopping List
+         </Text>
+         <IconOne/>
+      </View>
+      <View style={styles.footer}>
+        <View style={styles.inputContainer}>
+          <TextInput placeholder="Add an item to your list"/>
+        </View>
+      </View>
+      </SafeAreaView>
+
+
+
+
+  //{/* //   <View style={styles.container}>
+  //   <Button title="Add new Item" color="#1e90ff" onPress={startAddItemHandler}/>
+  //   <ItemInput placeHolderChanger={placeholder} onAddInput={addItemHandler} onCancel={endAddItemHandler}/>
+  //   <View style={styles.listContainer}>
+  //     <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => { */}
+  //{/* //       return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler}/>)
+  //     }}>
+  //     </FlatList> */}
+  //{/* //   </View> */}
+  //{/* // </View> */}
+
+  
 )
 
 }
 
+// const styles = StyleSheet.create({
+//     container: {
+//       flex: 1,
+//       paddingTop: 50,
+//       paddingHorizontal: 16
+//     },
+//     listContainer: {
+//       flex: 5,
+//     }
+//   });
+
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: 50,
-      paddingHorizontal: 16
-    },
-    listContainer: {
-      flex: 5,
-    }
-  });
+  header: {
+    padding: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    width:"100%",
+    flexDirection:"row",
+    alignItems:"center",
+    paddingHorizontal: 20,
+    color: "#fff"
+  },
+  inputContainer: {
+    backgroundColor: "#fff",
+    elevation: 40,
+    flex: 1,
+    height: 50,
+    marginVertical: 20,
+    marginRight: 20,
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    
+    
+
+  }
+});
 
 export default Main;
 
