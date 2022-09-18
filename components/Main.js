@@ -4,7 +4,9 @@
 import { useState } from 'react';
 import RemoveList from './Icons/RemoveList';
 import SaveList from './Icons/SaveList';
-import { StyleSheet, View, SafeAreaView, Text, Button, FlatList } from 'react-native';
+import IconPlus from './Icons/IconPlus';
+import PlusCircle from './Icons/PlusCircle';
+import { StyleSheet, View, SafeAreaView, Text, Button, FlatList, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
 import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/ItemInput.js"
@@ -67,12 +69,16 @@ return (
           Shopping List
          </Text>
          <RemoveList/>
-         <SaveList/>
       </View>
       <View style={styles.footer}>
         <View style={styles.inputContainer}>
           <TextInput placeholder="Add an item to your list"/>
         </View>
+        <TouchableOpacity>
+          <View style={styles.iconContainer}>
+            <PlusCircle/>
+          </View>
+        </TouchableOpacity>
       </View>
       </SafeAreaView>
 
@@ -132,8 +138,14 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingHorizontal: 20,
   },
-  icon: {
+  iconContainer: {
     backgroundColor: "#fff",
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    elevation: 40,
+    justifyContent: "center",
+    alignContent: "center"
   }
 });
 
