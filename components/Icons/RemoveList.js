@@ -6,7 +6,7 @@ import { mdiFileDocumentRemove } from '@mdi/js';
 
 
 const RemoveList = () => (
-  <Avatar.Icon size={35} icon={"delete"} color="red" backgroundColor="white"/>
+  <Avatar.Icon size={35} icon={"delete"} color="red" backgroundColor="#ededed"/>
 );
 
 export default RemoveList

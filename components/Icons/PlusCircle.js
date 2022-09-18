@@ -5,7 +5,7 @@ import { mdiPlusCircle } from '@mdi/js';
 // x icon
 
 const PlusCircle = () => (
-  <Avatar.Icon size={60} icon={"plus-circle"} color="green" backgroundColor="white"/>
+  <Avatar.Icon size={65} icon={"plus-circle"} color="green" backgroundColor="#ededed"/>
 );
 
 export default PlusCircle

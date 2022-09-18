@@ -70,6 +70,7 @@ return (
          </Text>
          <RemoveList/>
       </View>
+      
       <View style={styles.footer}>
         <View style={styles.inputContainer}>
           <TextInput style={styles.textInput} placeholder="Add an item to your list"/>
@@ -140,13 +141,13 @@ const styles = StyleSheet.create({
     padding: 5
   },
   iconContainer: {
-    backgroundColor: "#fff",
     height: 50,
     width: 50,
     borderRadius: 25,
     elevation: 40,
     justifyContent: "center",
-    alignContent: "center"
+    alignContent: "center",
+    backgroundColor:"#ededed"
   },
   textInput:{
     backgroundColor: "#fff",
