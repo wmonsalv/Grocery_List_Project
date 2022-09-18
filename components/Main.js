@@ -2,7 +2,8 @@
 //import { style } from '@mui/system';
 
 import { useState } from 'react';
-import IconOne from './Icons/IconOne';
+import RemoveList from './Icons/RemoveList';
+import SaveList from './Icons/SaveList';
 import { StyleSheet, View, SafeAreaView, Text, Button, FlatList } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
@@ -65,7 +66,8 @@ return (
         <Text style={{fontWeight: "bold", fontSize: 20, color: "black"}}>
           Shopping List
          </Text>
-         <IconOne/>
+         <RemoveList/>
+         <SaveList/>
       </View>
       <View style={styles.footer}>
         <View style={styles.inputContainer}>
@@ -129,9 +131,9 @@ const styles = StyleSheet.create({
     marginRight: 20,
     borderRadius: 30,
     paddingHorizontal: 20,
-    
-    
-
+  },
+  icon: {
+    backgroundColor: "#fff",
   }
 });
 

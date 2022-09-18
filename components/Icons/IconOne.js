@@ -4,7 +4,7 @@ import { mdiCloseBox } from '@mdi/js';
 
 
 const IconOne = () => (
-  <Avatar.Icon size={24} icon={mdiCloseBox} color="red"/>
+  <Avatar.Icon size={35} icon={"close-box"} color="red" backgroundColor="white"/>
 );
 
 export default IconOne
