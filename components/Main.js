@@ -3,7 +3,7 @@ import { StyleSheet, View, Button, FlatList } from 'react-native';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
 import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/ItemInput.js"
 
-//test comment to make sure I'm on firebase branch
+//test comment to make sure I'm still on firebase branch
 
 
 function Main() {
