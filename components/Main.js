@@ -16,89 +16,94 @@ import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Groc
 
 function Main() {
 
-const [listOfItems, setListofItems] = useState([])
+  const [listOfItems, setListofItems] = useState([])
 
-const [modalIsVisible, setModalisVisible] = useState(false)
+  const [modalIsVisible, setModalisVisible] = useState(false)
 
-function startAddItemHandler(){
-  setModalisVisible(true)
-}
-
-function endAddItemHandler(){
-  setModalisVisible(false)
-}
-
-const [placeholder, setPlaceHolder] = useState("Add Item to the list")
-
-//This placeholder state editor above is tho display a different message if an empty string is submitted by the user
-//isNan checks if input is a number, returns false if it is 
-
-function addItemHandler(enteredItemText) {
-
-  function test(enteredItemText){
-    return listOfItems.text === enteredItemText.text
+  function startAddItemHandler() {
+    setModalisVisible(true)
   }
 
-  // I have tried find and some, but I can't get the darn thing from taking in duplicate items
-
-  if(enteredItemText !== "" && isNaN(enteredItemText)!==false && !listOfItems.some((item) => {return item.text === enteredItemText})){
-    let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
-    setListofItems((currentListOfItems) => [...currentListOfItems, { text: withNoDigits, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
-    setPlaceHolder("Add Item to the list")
-  } 
-  else{
-    setPlaceHolder("Please type the name of an item")
+  function endAddItemHandler() {
+    setModalisVisible(false)
   }
-}
 
-//every item in my array is now an object with these attributes, entered text and a key
-//At the bottom, we have to do itemData.item.text to access the data attribute of the object
+  const [placeholder, setPlaceHolder] = useState("Add Item to the list")
 
-function deleteItemHandler(text){
-  setListofItems(currentListOfItems => { return currentListOfItems.filter((item) => item.text !== text)})
-}
+  //This placeholder state editor above is tho display a different message if an empty string is submitted by the user
+  //isNan checks if input is a number, returns false if it is 
 
-//Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
+  function addItemHandler(enteredItemText) {
 
-return (
+    function test(enteredItemText) {
+      return listOfItems.text === enteredItemText.text
+    }
+
+    // I have tried find and some, but I can't get the darn thing from taking in duplicate items
+
+    if (enteredItemText !== "" && isNaN(enteredItemText) !== false && !listOfItems.some((item) => { return item.text === enteredItemText })) {
+      let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
+      setListofItems((currentListOfItems) => [...currentListOfItems, { text: withNoDigits, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+      setPlaceHolder("Add Item to the list")
+    }
+    else {
+      setPlaceHolder("Please type the name of an item")
+    }
+  }
+
+  //every item in my array is now an object with these attributes, entered text and a key
+  //At the bottom, we have to do itemData.item.text to access the data attribute of the object
+
+  function deleteItemHandler(text) {
+    setListofItems(currentListOfItems => { return currentListOfItems.filter((item) => item.text !== text) })
+  }
+
+  //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
+
+  return (
 
 
-      <SafeAreaView style={{flex:1, backgroundColor: "#ededed"}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#ededed" }}>
       <View style={styles.header}>
-        <Text style={{fontWeight: "bold", fontSize: 20, color: "black"}}>
+        <Text style={{ fontWeight: "bold", fontSize: 20, color: "black" }}>
           Shopping List
-         </Text>
-         <RemoveList/>
+        </Text>
+        <RemoveList />
       </View>
-      
+      <View style={styles.listContainer}>
+        <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
+          return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler} />)
+        }}>
+        </FlatList>
+      </View>
       <View style={styles.footer}>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.textInput} placeholder="Add an item to your list"/>
+          <TextInput style={styles.textInput} placeholder="Add an item to your list" />
         </View>
         <TouchableOpacity>
           <View style={styles.iconContainer}>
-            <PlusCircle/>
+            <PlusCircle />
           </View>
         </TouchableOpacity>
       </View>
-      </SafeAreaView>
+    </SafeAreaView>
 
 
 
 
-  //{/* //   <View style={styles.container}>
-  //   <Button title="Add new Item" color="#1e90ff" onPress={startAddItemHandler}/>
-  //   <ItemInput placeHolderChanger={placeholder} onAddInput={addItemHandler} onCancel={endAddItemHandler}/>
-  //   <View style={styles.listContainer}>
-  //     <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => { */}
-  //{/* //       return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler}/>)
-  //     }}>
-  //     </FlatList> */}
-  //{/* //   </View> */}
-  //{/* // </View> */}
+    //{/* //   <View style={styles.container}>
+    //   <Button title="Add new Item" color="#1e90ff" onPress={startAddItemHandler}/>
+    //   <ItemInput placeHolderChanger={placeholder} onAddInput={addItemHandler} onCancel={endAddItemHandler}/>
+    //   <View style={styles.listContainer}>
+    //     <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => { */}
+    //{/* //       return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler}/>)
+    //     }}>
+    //     </FlatList> */}
+    //{/* //   </View> */}
+    //{/* // </View> */}
 
-  
-)
+
+  )
 
 }
 
@@ -123,9 +128,9 @@ const styles = StyleSheet.create({
   footer: {
     position: "absolute",
     bottom: 0,
-    width:"100%",
-    flexDirection:"row",
-    alignItems:"center",
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 20,
     color: "#fff"
   },
@@ -147,17 +152,22 @@ const styles = StyleSheet.create({
     elevation: 40,
     justifyContent: "center",
     alignContent: "center",
-    backgroundColor:"#ededed"
+    backgroundColor: "#ededed"
   },
-  textInput:{
+  textInput: {
     backgroundColor: "#fff",
     borderColor: "#fff",
     backgroundColor: "#fff",
     flex: 1,
     height: 50,
     paddingHorizontal: 20,
-  }
-  
+  },
+  container: {
+    flex: 1,
+    paddingTop: 50,
+    paddingHorizontal: 16
+  },
+
 });
 
 export default Main;
