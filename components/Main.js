@@ -13,6 +13,7 @@ import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Groc
 
 //test comment to make sure I'm still on firebase branch
 
+//you can only delete them off the list once you have checked them off
 
 function Main() {
 
