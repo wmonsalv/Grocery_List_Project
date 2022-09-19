@@ -16,28 +16,21 @@ import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Groc
 
 function Main() {
 
-  const [listOfItems, setListofItems] = useState([])
-
-  const [modalIsVisible, setModalisVisible] = useState(false)
-
-  function startAddItemHandler() {
-    setModalisVisible(true)
-  }
-
-  function endAddItemHandler() {
-    setModalisVisible(false)
-  }
+  const [listOfItems, setListofItems] = useState([
+    
+    {id:1, item:"Tacos", completed: true},
+    {id:2, item:"Tacos", completed: true}
+  ])
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")
 
-  //This placeholder state editor above is tho display a different message if an empty string is submitted by the user
-  //isNan checks if input is a number, returns false if it is 
+  const [enteredItemText, setEnteredItemText] = useState("")
+
+    function listInputHandler(enteredText) {
+        setEnteredItemText(enteredText)
+    }
 
   function addItemHandler(enteredItemText) {
-
-    function test(enteredItemText) {
-      return listOfItems.text === enteredItemText.text
-    }
 
     // I have tried find and some, but I can't get the darn thing from taking in duplicate items
 
@@ -45,6 +38,7 @@ function Main() {
       let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
       setListofItems((currentListOfItems) => [...currentListOfItems, { text: withNoDigits, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
       setPlaceHolder("Add Item to the list")
+      setEnteredItemText("")
     }
     else {
       setPlaceHolder("Please type the name of an item")
@@ -71,18 +65,25 @@ function Main() {
         <RemoveList />
       </View>
       <View style={styles.listContainer}>
-        <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => {
+        <FlatList 
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{padding:20, paddingBottom:100}}
+        data={listOfItems} renderItem={(itemData) => {
           return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler} />)
         }}>
         </FlatList>
       </View>
       <View style={styles.footer}>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.textInput} placeholder="Add an item to your list" />
+          <TextInput 
+          style={styles.textInput} 
+          value={enteredItemText} 
+          onChangeText={listInputHandler} 
+          placeholder={placeholder} />
         </View>
         <TouchableOpacity>
           <View style={styles.iconContainer}>
-            <PlusCircle />
+            <PlusCircle onPress={addItemHandler} />
           </View>
         </TouchableOpacity>
       </View>
@@ -107,16 +108,6 @@ function Main() {
 
 }
 
-// const styles = StyleSheet.create({
-//     container: {
-//       flex: 1,
-//       paddingTop: 50,
-//       paddingHorizontal: 16
-//     },
-//     listContainer: {
-//       flex: 5,
-//     }
-//   });
 
 const styles = StyleSheet.create({
   header: {
@@ -167,6 +158,9 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 16
   },
+  listContainer: {
+      flex: 5,
+        }
 
 });
 
@@ -205,3 +199,23 @@ export default Main;
 
 // }
 
+ // function addInputHandler(){
+    //     onAddInput(enteredItemText)
+    //     setEnteredItemText("")
+    // }
+
+  //This placeholder state editor above is tho display a different message if an empty string is submitted by the user
+  //isNan checks if input is a number, returns false if it is 
+
+
+
+// const styles = StyleSheet.create({
+//     container: {
+//       flex: 1,
+//       paddingTop: 50,
+//       paddingHorizontal: 16
+//     },
+//     listContainer: {
+//       flex: 5,
+//     }
+//   });

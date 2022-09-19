@@ -23,10 +23,14 @@ export default GroceryItem
 const styles = StyleSheet.create({
     itemListStyles: {
         margin: 8,
-        padding: 8,
-        borderRadius: 6,
+        padding: 20,
+        borderRadius: 7,
         backgroundColor: "#27963C",
         color: "white",
+        flexDirection:"row",
+        elevation:12,
+        marginVertical:10
+
     },
     pressedItem: {
         opacity: 0.5,
