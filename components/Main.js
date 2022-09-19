@@ -18,8 +18,8 @@ function Main() {
 
   const [listOfItems, setListofItems] = useState([
     
-    {id:1, item:"Tacos", completed: true},
-    {id:2, item:"Tacos", completed: true}
+    {id:1, text:"Tacos", completed: true},
+    {id:2, text:"Cheese", completed: false}
   ])
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")
@@ -69,7 +69,7 @@ function Main() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{padding:20, paddingBottom:100}}
         data={listOfItems} renderItem={(itemData) => {
-          return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler} />)
+          return (<GroceryItem text={itemData.item.text} completed={itemData.item.completed} id={itemData.item.text} onDelete={deleteItemHandler} />)
         }}>
         </FlatList>
       </View>

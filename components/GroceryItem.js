@@ -6,13 +6,13 @@ function GroceryItem(props) {
     return (
 
         <View style={styles.itemListStyles} >
-            <Pressable
-                android_ripple={{color: "#4682B4"}}
-                onPress={props.onDelete.bind(this, props.text)}
-                style = {({pressed}) => pressed && styles.pressedItem}
-                >
-                <Text style={styles.textFontColor}>{props.text}</Text>
-            </Pressable>
+            <View style={{ flex: 1 }}>
+                <Text style={{
+                    textDecorationLine: props.completed ? "line-through" : "none", color: "white",
+                    fontWeight: "bold",
+                    fontSize: 15,
+                }}>{props.text}</Text>
+            </View>
         </View>
 
     )
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         backgroundColor: "#27963C",
         color: "white",
-        flexDirection:"row",
-        elevation:12,
-        marginVertical:10
+        flexDirection: "row",
+        elevation: 12,
+        marginVertical: 10
 
     },
     pressedItem: {
@@ -38,5 +38,7 @@ const styles = StyleSheet.create({
     },
     textFontColor: {
         color: "white",
+        fontWeight: "bold",
+        fontSize: 15,
     }
 })
