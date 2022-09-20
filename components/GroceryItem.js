@@ -13,7 +13,7 @@ function GroceryItem(props) {
                     textDecorationLine: props.completed ? "line-through" : "none", color: "white",
                     fontWeight: "bold",
                     fontSize: 15,
-                }}>{props.text}</Text>
+                }}>{props.text.text}</Text>
                 </View>
                 {!props.completed?(
                 <TouchableOpacity style={styles.iconCheck} >

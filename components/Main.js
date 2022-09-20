@@ -47,13 +47,14 @@ function Main() {
   //every item in my array is now an object with these attributes, entered text and a key
   //At the bottom, we have to do itemData.item.text to access the data attribute of the object
 
-  function addItemHandler(enteredItemText) {
+  function addItemHandler() {
     
     const newItem = {
-      id: Math.random(),
+      key: Math.random(),
       text: enteredItemText,
       completed: false
     }
+    
     setListofItems([...listOfItems, newItem])
     setEnteredItemText("")
 
@@ -81,7 +82,7 @@ function Main() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{padding:10, paddingBottom:100}}
         data={listOfItems} 
-        renderItem={({item}) => (<GroceryItem text={item.text} completed={item.completed} key={item.id} onDelete={deleteItemHandler} 
+        renderItem={({item}) => (<GroceryItem text={item} onDelete={deleteItemHandler} 
         />)}
         />
       </View>
