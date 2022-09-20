@@ -18,7 +18,7 @@ function GroceryItem(props) {
                 }}>{props.data.text}</Text>
                 </View>
                 {!props.completed?(
-                <TouchableOpacity style={styles.iconCheck} onPress={onPressChecked}>
+                <TouchableOpacity style={styles.iconCheck}>
                 <Check/>
                 </TouchableOpacity>)
                 :""} 
