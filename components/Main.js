@@ -11,16 +11,14 @@ import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
 import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/ItemInput.js"
 
-//test comment to make sure I'm still on firebase branch
-
 //you can only delete them off the list once you have checked them off
 
 function Main() {
 
   const [listOfItems, setListofItems] = useState([
     
-    {id:1, text:"Tacos", completed: true},
-    {id:2, text:"Cheese", completed: false}
+    {key:1, text:"Tacos", completed: true},
+    {key:2, text:"Cheese", completed: false}
   ])
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")
@@ -49,15 +47,15 @@ function Main() {
   //every item in my array is now an object with these attributes, entered text and a key
   //At the bottom, we have to do itemData.item.text to access the data attribute of the object
 
-  function addItem(enteredItemText) {
+  function addItemHandler(enteredItemText) {
+    
     const newItem = {
       id: Math.random(),
       text: enteredItemText,
       completed: false
     }
-    setListofItems((prev) => [...prev, newItem])
+    setListofItems([...listOfItems, newItem])
     setEnteredItemText("")
-    //console.log(newItem.text)
 
   }
 
@@ -81,11 +79,11 @@ function Main() {
       <View style={styles.listContainer}>
         <FlatList 
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{padding:20, paddingBottom:100}}
-        data={listOfItems} renderItem={(itemData) => {
-          return (<GroceryItem text={itemData.item.text} completed={itemData.item.completed} id={itemData.item.text} onDelete={deleteItemHandler} />)
-        }}>
-        </FlatList>
+        contentContainerStyle={{padding:10, paddingBottom:100}}
+        data={listOfItems} 
+        renderItem={({item}) => (<GroceryItem text={item.text} completed={item.completed} key={item.id} onDelete={deleteItemHandler} 
+        />)}
+        />
       </View>
       <View style={styles.footer}>
         <View style={styles.inputContainer}>
@@ -93,9 +91,9 @@ function Main() {
           style={styles.textInput} 
           value={enteredItemText} 
           onChangeText={listInputHandler} 
-          placeholder={placeholder} />
+          placeholder={placeholder}/>
         </View>
-        <TouchableOpacity onPress={addItem} shoppingList={listOfItems}>
+        <TouchableOpacity onPress={addItemHandler}>
           <View style={styles.iconContainer}>
             <PlusCircle/>
           </View>
