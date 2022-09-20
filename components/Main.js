@@ -59,15 +59,18 @@ function Main() {
     setListofItems(currentListOfItems => { return currentListOfItems.filter((item) => item.text !== text) })
   }
 
-//   const checked = (listKey) => {
-//     const newItem = listOfItems.map((item) => {
-//         if(item.key === props.data.key){
-//             return {...item, completed : true}
-//         }
-//         return item; 
-//     })
-//     setListofItems(newItem)
-// }
+  const checked = (key) => {
+    const newItem = listOfItems.map((item) => {
+        if(item.key === key){
+            return {...item, completed:true}
+        }
+        return item; 
+    })
+    setListofItems(newItem)
+}
+
+
+  
 
   
 
@@ -88,7 +91,6 @@ function Main() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{padding:10, paddingBottom:100}}
         data={listOfItems} 
-        key={listOfItems.key}
         renderItem={({item}) => (<GroceryItem data={item} onDelete={deleteItemHandler} 
         />)}
         />

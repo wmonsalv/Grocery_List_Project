@@ -7,12 +7,16 @@ import Check from "./Icons/Check"
 
 function GroceryItem(props) {
 
+    
+
+    
+
     return (
 
         <View style={styles.itemListStyles} >
             <View style={{ flex: 1 }}>        
                 <Text style={{
-                    textDecorationLine: props.completed ? "line-through" : "none", color: "white",
+                    textDecorationLine: props.data.completed ? "line-through" : "none", color: "white",
                     fontWeight: "bold",
                     fontSize: 15,
                 }}>{props.data.text}</Text>
