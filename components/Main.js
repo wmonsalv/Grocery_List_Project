@@ -31,23 +31,35 @@ function Main() {
         setEnteredItemText(enteredText)
     }
 
-  function addItemHandler(enteredItemText) {
+  // function addItemHandler(enteredItemText) {
 
-    // I have tried find and some, but I can't get the darn thing from taking in duplicate items
+  //   console.log(enteredItemText)
 
-    if (enteredItemText !== "" && isNaN(enteredItemText) !== false && !listOfItems.some((item) => { return item.text === enteredItemText })) {
-      let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
-      setListofItems((currentListOfItems) => [...currentListOfItems, { text: withNoDigits, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
-      setPlaceHolder("Add Item to the list")
-      setEnteredItemText("")
-    }
-    else {
-      setPlaceHolder("Please type the name of an item")
-    }
-  }
+  //   // if (enteredItemText !== "" && isNaN(enteredItemText) !== false && !listOfItems.some((item) => { return item.text === enteredItemText })) {
+  //   //   let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
+  //   //   setListofItems((currentListOfItems) => [...currentListOfItems, { text: withNoDigits, key: Math.random().toString() }]) //This is updating the old grocery list state based on the old grocery list state by appending a new enteredItemText
+  //   //   setPlaceHolder("Add Item to the list")
+  //   //   setEnteredItemText("")
+  //   // }
+  //   // else {
+  //   //   setPlaceHolder("Please type the name of an item")
+  //   // }
+  // }
 
   //every item in my array is now an object with these attributes, entered text and a key
   //At the bottom, we have to do itemData.item.text to access the data attribute of the object
+
+  function addItem(enteredItemText) {
+    const newItem = {
+      id: Math.random(),
+      text: enteredItemText,
+      completed: false
+    }
+    setListofItems((prev) => [...prev, newItem])
+    //console.log(newItem.text)
+
+  }
+
 
   function deleteItemHandler(text) {
     setListofItems(currentListOfItems => { return currentListOfItems.filter((item) => item.text !== text) })
@@ -82,9 +94,9 @@ function Main() {
           onChangeText={listInputHandler} 
           placeholder={placeholder} />
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={addItem} shoppingList={listOfItems}>
           <View style={styles.iconContainer}>
-            <PlusCircle onPress={addItemHandler} />
+            <PlusCircle/>
           </View>
         </TouchableOpacity>
       </View>
