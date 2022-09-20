@@ -6,7 +6,7 @@ import RemoveList from './Icons/RemoveList';
 import SaveList from './Icons/SaveList';
 import IconPlus from './Icons/IconPlus';
 import PlusCircle from './Icons/PlusCircle';
-import { StyleSheet, View, SafeAreaView, Text, Button, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, Button, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
 import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/ItemInput.js"
@@ -47,6 +47,7 @@ function Main() {
     }
 
     else {
+      Alert.alert("Error", "Please enter an item that isn't an empty string or is already on the list.")
       setEnteredItemText("")
       setPlaceHolder("Please type the name of an item")
       }
