@@ -56,6 +56,7 @@ function Main() {
       completed: false
     }
     setListofItems((prev) => [...prev, newItem])
+    setEnteredItemText("")
     //console.log(newItem.text)
 
   }

@@ -8,17 +8,12 @@ function GroceryItem(props) {
     return (
 
         <View style={styles.itemListStyles} >
-            <View style={{ flex: 1 }}>
-                {props.shoppingList.map(item => (
-                
+            <View style={{ flex: 1 }}>        
                 <Text style={{
                     textDecorationLine: props.completed ? "line-through" : "none", color: "white",
                     fontWeight: "bold",
                     fontSize: 15,
-                }}>{item.text}</Text>
-                )
-                )
-                }
+                }}>{props.text}</Text>
                 </View>
                 {!props.completed?(
                 <TouchableOpacity style={styles.iconCheck} >
