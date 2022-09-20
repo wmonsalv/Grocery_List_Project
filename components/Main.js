@@ -49,14 +49,24 @@ function Main() {
 
   function addItemHandler() {
     
+    if (enteredItemText !== "" && isNaN(enteredItemText) !== false && !listOfItems.some((item) => { return item.text === enteredItemText })) {
+    let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
+
     const newItem = {
       key: Math.random(),
-      text: enteredItemText,
+      text: withNoDigits,
       completed: false
     }
     
-    setListofItems([...listOfItems, newItem])
+    setListofItems((prevListOfItems) => [...prevListOfItems, newItem])
     setEnteredItemText("")
+    setPlaceHolder("Add Item to the list")
+
+    }
+
+    else {
+      setPlaceHolder("Please type the name of an item")
+      }
 
   }
 
