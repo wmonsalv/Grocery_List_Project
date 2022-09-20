@@ -59,6 +59,18 @@ function Main() {
     setListofItems(currentListOfItems => { return currentListOfItems.filter((item) => item.text !== text) })
   }
 
+//   const checked = (listKey) => {
+//     const newItem = listOfItems.map((item) => {
+//         if(item.key === props.data.key){
+//             return {...item, completed : true}
+//         }
+//         return item; 
+//     })
+//     setListofItems(newItem)
+// }
+
+  
+
   //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
 
   return (
@@ -76,7 +88,8 @@ function Main() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{padding:10, paddingBottom:100}}
         data={listOfItems} 
-        renderItem={({item}) => (<GroceryItem text={item} onDelete={deleteItemHandler} 
+        key={listOfItems.key}
+        renderItem={({item}) => (<GroceryItem data={item} onDelete={deleteItemHandler} 
         />)}
         />
       </View>

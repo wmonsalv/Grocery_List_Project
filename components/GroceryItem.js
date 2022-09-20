@@ -4,7 +4,9 @@ import Check from "./Icons/Check"
 
 //The data from the app component is passed down onto the onPress attribute on pressable through props
 
+
 function GroceryItem(props) {
+
     return (
 
         <View style={styles.itemListStyles} >
@@ -13,10 +15,10 @@ function GroceryItem(props) {
                     textDecorationLine: props.completed ? "line-through" : "none", color: "white",
                     fontWeight: "bold",
                     fontSize: 15,
-                }}>{props.text.text}</Text>
+                }}>{props.data.text}</Text>
                 </View>
                 {!props.completed?(
-                <TouchableOpacity style={styles.iconCheck} >
+                <TouchableOpacity style={styles.iconCheck} onPress={onPressChecked}>
                 <Check/>
                 </TouchableOpacity>)
                 :""} 
