@@ -7,9 +7,10 @@ import Check from "./Icons/Check"
 
 function GroceryItem(props) {
 
-    
+    function checked(){
+        props.myFunction(props.data.key)
+    }
 
-    
 
     return (
 
@@ -22,7 +23,7 @@ function GroceryItem(props) {
                 }}>{props.data.text}</Text>
                 </View>
                 {!props.completed?(
-                <TouchableOpacity style={styles.iconCheck}>
+                <TouchableOpacity style={styles.iconCheck} onPress={checked}>
                 <Check/>
                 </TouchableOpacity>)
                 :""} 

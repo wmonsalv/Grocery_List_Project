@@ -60,13 +60,13 @@ function Main() {
   }
 
   const checked = (key) => {
-    const newItem = listOfItems.map((item) => {
+    const anotherItem = listOfItems.map((item) => {
         if(item.key === key){
             return {...item, completed:true}
         }
         return item; 
     })
-    setListofItems(newItem)
+    setListofItems(anotherItem)
 }
 
 
@@ -91,7 +91,7 @@ function Main() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{padding:10, paddingBottom:100}}
         data={listOfItems} 
-        renderItem={({item}) => (<GroceryItem data={item} onDelete={deleteItemHandler} 
+        renderItem={({item}) => (<GroceryItem myFunction={checked} data={item} onDelete={deleteItemHandler} 
         />)}
         />
       </View>
