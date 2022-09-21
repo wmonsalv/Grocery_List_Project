@@ -60,13 +60,13 @@ function Main() {
   }
 
   const checked = (key) => {
-    const anotherItem = listOfItems.map((item) => {
+    const updatedItem = listOfItems.map((item) => {
         if(item.key === key){
             return {...item, completed:true}
         }
         return item; 
     })
-    setListofItems(anotherItem)
+    setListofItems(updatedItem)
 }
 
 
