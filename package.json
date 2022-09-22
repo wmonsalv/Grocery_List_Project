@@ -12,6 +12,8 @@
     "@mdi/js": "^7.0.96",
     "@mdi/react": "^1.6.1",
     "@react-native-async-storage/async-storage": "^1.17.10",
+    "@react-native-firebase/app": "^15.6.0",
+    "@react-native-firebase/auth": "^15.6.0",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
     "expo": "~46.0.8",
