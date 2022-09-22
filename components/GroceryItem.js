@@ -11,6 +11,10 @@ function GroceryItem(props) {
         props.myFunction(props.data.key)
     }
 
+    function deleted(){
+        props.myDeleteFunc(props.data.key)
+    }
+
 
     return (
 
@@ -27,7 +31,7 @@ function GroceryItem(props) {
                 <Check/>
                 </TouchableOpacity>)
                 :""} 
-                <TouchableOpacity style={styles.iconX}>
+                <TouchableOpacity style={styles.iconX} onPress={deleted}>
                 <IconOne/>
                 </TouchableOpacity>          
             </View>

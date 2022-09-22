@@ -69,6 +69,11 @@ function Main() {
     setListofItems(updatedItem)
 }
 
+  const deleted = (originalItemKey) => {
+    const updatedList = listOfItems.filter(item => item.key !== originalItemKey)
+    setListofItems(updatedList)
+  }
+
 
   
 
@@ -91,7 +96,7 @@ function Main() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{padding:10, paddingBottom:100}}
         data={listOfItems} 
-        renderItem={({item}) => (<GroceryItem myFunction={checked} data={item} onDelete={deleteItemHandler} 
+        renderItem={({item}) => (<GroceryItem myFunction={checked} myDeleteFunc={deleted} data={item} onDelete={deleteItemHandler} 
         />)}
         />
       </View>
