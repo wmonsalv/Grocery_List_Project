@@ -47,7 +47,7 @@ function Main() {
     }
 
     else {
-      Alert.alert("Error", "Please enter an item that isn't an empty string or is already on the list.")
+      Alert.alert("Error", "Please enter a string.")
       setEnteredItemText("")
       setPlaceHolder("Please type the name of an item")
       }
