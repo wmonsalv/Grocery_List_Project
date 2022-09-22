@@ -16,33 +16,33 @@ import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Groc
 function Main() {
 
   const [listOfItems, setListofItems] = useState([
-    
-    {key:1, text:"Tacos", completed: true},
-    {key:2, text:"Cheese", completed: false}
+
+    { key: 1, text: "Tacos", completed: true },
+    { key: 2, text: "Cheese", completed: false }
   ])
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")
 
   const [enteredItemText, setEnteredItemText] = useState("")
 
-    function listInputHandler(enteredText) {
-        setEnteredItemText(enteredText)
-    }
+  function listInputHandler(enteredText) {
+    setEnteredItemText(enteredText)
+  }
 
   function addItemHandler() {
-    
-    if (enteredItemText !== "" && isNaN(enteredItemText) !== false && !listOfItems.some((item) => { return item.text === enteredItemText })) {
-    let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
 
-    const newItem = {
-      key: Math.random(),
-      text: withNoDigits,
-      completed: false
-    }
-    
-    setListofItems((prevListOfItems) => [...prevListOfItems, newItem])
-    setEnteredItemText("")
-    setPlaceHolder("Add Item to the list")
+    if (enteredItemText !== "" && isNaN(enteredItemText) !== false && !listOfItems.some((item) => { return item.text === enteredItemText })) {
+      let withNoDigits = enteredItemText.replace(/[0-9]/g, '');
+
+      const newItem = {
+        key: Math.random(),
+        text: withNoDigits,
+        completed: false
+      }
+
+      setListofItems((prevListOfItems) => [...prevListOfItems, newItem])
+      setEnteredItemText("")
+      setPlaceHolder("Add Item to the list")
 
     }
 
@@ -50,7 +50,7 @@ function Main() {
       Alert.alert("Error", "Please enter a string.")
       setEnteredItemText("")
       setPlaceHolder("Please type the name of an item")
-      }
+    }
 
   }
 
@@ -61,13 +61,13 @@ function Main() {
 
   const checked = (key) => {
     const updatedItem = listOfItems.map((item) => {
-        if(item.key === key){
-            return {...item, completed:true}
-        }
-        return item; 
+      if (item.key === key) {
+        return { ...item, completed: true }
+      }
+      return item;
     })
     setListofItems(updatedItem)
-}
+  }
 
   const deleted = (originalItemKey) => {
     const updatedList = listOfItems.filter(item => item.key !== originalItemKey)
@@ -75,23 +75,19 @@ function Main() {
   }
 
   const clearList = () => {
-    Alert.alert("Confirm", "Clear Items?",[
+    Alert.alert("Confirm", "Clear Items?", [
       {
         text: "Yes",
-        onPress : () => setListofItems([])
+        onPress: () => setListofItems([])
       },
       {
-        text:"No"
+        text: "No"
 
       }
     ])
-    
+
   }
 
-
-  
-
-  
 
   //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
 
@@ -104,48 +100,33 @@ function Main() {
           Shopping List
         </Text>
         <TouchableOpacity onPress={clearList}>
-        <RemoveList />
+          <RemoveList />
         </TouchableOpacity>
       </View>
       <View style={styles.listContainer}>
-        <FlatList 
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{padding:10, paddingBottom:100}}
-        data={listOfItems} 
-        renderItem={({item}) => (<GroceryItem myFunction={checked} myDeleteFunc={deleted} data={item} onDelete={deleteItemHandler} 
-        />)}
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ padding: 10, paddingBottom: 100 }}
+          data={listOfItems}
+          renderItem={({ item }) => (<GroceryItem myFunction={checked} myDeleteFunc={deleted} data={item} onDelete={deleteItemHandler}
+          />)}
         />
       </View>
       <View style={styles.footer}>
         <View style={styles.inputContainer}>
-          <TextInput 
-          style={styles.textInput} 
-          value={enteredItemText} 
-          onChangeText={listInputHandler} 
-          placeholder={placeholder}/>
+          <TextInput
+            style={styles.textInput}
+            value={enteredItemText}
+            onChangeText={listInputHandler}
+            placeholder={placeholder} />
         </View>
         <TouchableOpacity onPress={addItemHandler}>
           <View style={styles.iconContainer}>
-            <PlusCircle/>
+            <PlusCircle />
           </View>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-
-
-
-
-    //{/* //   <View style={styles.container}>
-    //   <Button title="Add new Item" color="#1e90ff" onPress={startAddItemHandler}/>
-    //   <ItemInput placeHolderChanger={placeholder} onAddInput={addItemHandler} onCancel={endAddItemHandler}/>
-    //   <View style={styles.listContainer}>
-    //     <FlatList data={listOfItems} alwaysBounceVertical={false} renderItem={(itemData) => { */}
-    //{/* //       return (<GroceryItem text={itemData.item.text} id={itemData.item.text} onDelete={deleteItemHandler}/>)
-    //     }}>
-    //     </FlatList> */}
-    //{/* //   </View> */}
-    //{/* // </View> */}
-
 
   )
 
@@ -202,63 +183,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16
   },
   listContainer: {
-      flex: 5,
-        }
+    flex: 5,
+  }
 
 });
 
 export default Main;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import Main from "/Users/william_x1/Documents/GitHub/Grocery_List_Project-test_branch/components/Main.js";
-// 
-
-// export default function App() {
-
-//     const Stack = createNativeStackNavigator();
-
-//     return (
-//         <NavigationContainer>
-//             <Stack.Navigator>
-//                 <Stack.Screen name="Home" component={Main} />
-//             </Stack.Navigator>
-//         </NavigationContainer>
-//     );
-
-
-
-// }
-
- // function addInputHandler(){
-    //     onAddInput(enteredItemText)
-    //     setEnteredItemText("")
-    // }
-
-  //This placeholder state editor above is tho display a different message if an empty string is submitted by the user
-  //isNan checks if input is a number, returns false if it is 
-
-
-
-// const styles = StyleSheet.create({
-//     container: {
-//       flex: 1,
-//       paddingTop: 50,
-//       paddingHorizontal: 16
-//     },
-//     listContainer: {
-//       flex: 5,
-//     }
-//   });
