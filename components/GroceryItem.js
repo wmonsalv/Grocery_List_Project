@@ -1,19 +1,40 @@
-import { StyleSheet, View, Text, Pressable } from "react-native"
+import { StyleSheet, View, Text, Pressable, TouchableOpacity  } from "react-native"
+import IconOne from "./Icons/IconOne"
+import Check from "./Icons/Check"
 
 //The data from the app component is passed down onto the onPress attribute on pressable through props
 
+
 function GroceryItem(props) {
+
+    function checked(){
+        props.myFunction(props.data.key)
+    }
+
+    function deleted(){
+        props.myDeleteFunc(props.data.key)
+    }
+
+
     return (
 
         <View style={styles.itemListStyles} >
-            <Pressable
-                android_ripple={{color: "#4682B4"}}
-                onPress={props.onDelete.bind(this, props.text)}
-                style = {({pressed}) => pressed && styles.pressedItem}
-                >
-                <Text style={styles.textFontColor}>{props.text}</Text>
-            </Pressable>
-        </View>
+            <View style={{ flex: 1 }}>        
+                <Text style={{
+                    textDecorationLine: props.data.completed ? "line-through" : "none", color: "white",
+                    fontWeight: "bold",
+                    fontSize: 15,
+                }}>{props.data.text}</Text>
+                </View>
+                {!props.completed?(
+                <TouchableOpacity style={styles.iconCheck} onPress={checked}>
+                <Check/>
+                </TouchableOpacity>)
+                :""} 
+                <TouchableOpacity style={styles.iconX} onPress={deleted}>
+                <IconOne/>
+                </TouchableOpacity>          
+            </View>
 
     )
 }
@@ -22,11 +43,16 @@ export default GroceryItem
 
 const styles = StyleSheet.create({
     itemListStyles: {
-        margin: 8,
-        padding: 8,
-        borderRadius: 6,
+        margin: 4,
+        padding: 5,
+        borderRadius: 7,
         backgroundColor: "#27963C",
         color: "white",
+        flexDirection: "row",
+        elevation: 12,
+        marginVertical: 10,
+        textAlign:"center"
+
     },
     pressedItem: {
         opacity: 0.5,
@@ -34,5 +60,21 @@ const styles = StyleSheet.create({
     },
     textFontColor: {
         color: "white",
+        fontWeight: "bold",
+        fontSize: 20,
+    },
+    iconX :{
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",  
+        justifyContent: 'space-between',
+    },
+    iconCheck:{
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row", 
+        right: 3,
+        position: "relative",
+        
     }
 })

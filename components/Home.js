@@ -1,6 +1,8 @@
 import { Image, View, Text, StyleSheet } from "react-native"
 import HomeButton from "./HomeButton"
 
+//this is just a test to make sure that I'm on the firebase branch 
+
 
 function Home({navigation}) {
 
