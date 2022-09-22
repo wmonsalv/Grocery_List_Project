@@ -11,7 +11,7 @@ import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
 import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/ItemInput.js"
 
-//Just to make sure I'm on the firebase V2 
+//Just to make sure I'm on the firebase V2 test 2
 
 function Main() {
 
