@@ -74,6 +74,20 @@ function Main() {
     setListofItems(updatedList)
   }
 
+  const clearList = () => {
+    Alert.alert("Confirm", "Clear Items?",[
+      {
+        text: "Yes",
+        onPress : () => setListofItems([])
+      },
+      {
+        text:"No"
+
+      }
+    ])
+    
+  }
+
 
   
 
@@ -89,7 +103,9 @@ function Main() {
         <Text style={{ fontWeight: "bold", fontSize: 20, color: "black" }}>
           Shopping List
         </Text>
+        <TouchableOpacity onPress={clearList}>
         <RemoveList />
+        </TouchableOpacity>
       </View>
       <View style={styles.listContainer}>
         <FlatList 
