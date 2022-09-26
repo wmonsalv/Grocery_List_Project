@@ -2,6 +2,7 @@ import Main from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_L
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Home.js";
+import Login from "./components/Login/Login";
 
 export default function App() {
 
@@ -10,8 +11,9 @@ export default function App() {
         return (
             <NavigationContainer>
                 <Stack.Navigator initialRouteName="Home">
-                    <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
-                    <Stack.Screen options={{ headerShown: false }} name="addPage" component={Main} />
+                    <Stack.Screen  name="Home" component={Home} />
+                    <Stack.Screen  name="Make a List" component={Main} />
+                    <Stack.Screen  name="Login" component={Login} />
                 </Stack.Navigator>
             </NavigationContainer>
            

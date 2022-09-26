@@ -10,7 +10,10 @@ function Home({navigation}) {
 
         <View style={styles.Background}>
         <Image style={styles.imageEdit} source={require("/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/assets/images/ShoppingList.png")}/>
-        <HomeButton click={() => navigation.navigate("addPage")}/>
+        <View style={styles.justifyContents} >
+        <HomeButton buttonName="Create a List" click={() => navigation.navigate("Make a List")}/>
+        <HomeButton buttonName="Login" click={() => navigation.navigate("Login")}/>
+        </View>
         </View>
     )
      
@@ -21,6 +24,10 @@ function Home({navigation}) {
 const styles = StyleSheet.create({
     imageEdit: {
         justifyContent: 'center',
+    },
+    justifyContents : {
+        flex : 2,
+        alignItems: "center"
     },
     Background: {
         justifycontent:"center",
