@@ -1,8 +1,12 @@
 import { KeyboardAvoidingView, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import {useState} from 'react'
 import { TextInput } from 'react-native-paper'
 
 const Login = () => {
+
+    const [email,setEmail] = useState("")
+    const [password,setPassword] = useState("")
+
     return (
 
         <KeyboardAvoidingView
@@ -11,14 +15,14 @@ const Login = () => {
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder="email"
-                    // value={ }
-                    // onChangeText={text => }
+                    value={email}
+                    onChangeText={text => setEmail(text) } //anytime text changes, we set the email to that text
                     style={styles.input}
                 />
                 <TextInput
                     placeholder="Password"
-                    // value={ }
-                    // onChangeText={text => }
+                    value={password}
+                    onChangeText={pass => setPassword(pass)} //anytime passw text changes, we change the state to the new value of pass 
                     style={styles.input}
                     secureTextEntry
                 />
