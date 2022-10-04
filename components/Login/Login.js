@@ -1,24 +1,49 @@
 import { Alert, KeyboardAvoidingView, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
-import {useState} from 'react'
+import { useState } from 'react'
 import { TextInput } from 'react-native-paper'
 import { auth } from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
+import { useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 const Login = () => {
 
-    const [email,setEmail] = useState("")
-    const [password,setPassword] = useState("")
+    const navigation = useNavigation()
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    useEffect(() => { //these lines of code make sure to stop the listener once we leave the screen
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                navigation.navigate("User lists")
+            }
+        })
+        return unsubscribe
+    }, []) //we pass in an empty array so that it only runs once at the beginning 
 
     const handleSignUp = () => {
         auth
-        .createUserWithEmailAndPassword(email, password)  //creates user with email and password we just provided
-        .then(userCredentials => {
+            .createUserWithEmailAndPassword(email, password)  //creates user with email and password we just provided
+            .then(userCredentials => {
                 const user = userCredentials.user
-                console.log(user.email)
+                console.log("Registered with: ", user.email)
             })
-        .catch(error => alert(error.message()))
+            .catch(error => alert(error.message()))
 
         Alert.alert("Account was registered successfully")
 
+        setEmail("")
+        setPassword("")
+    }
+
+    const handleLogin = () => {
+        auth
+            .signInWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user
+                console.log("Logged in with: ", user.email)
+            })
+            .catch(error => alert(error.message()))
         setEmail("")
         setPassword("")
     }
@@ -32,7 +57,7 @@ const Login = () => {
                 <TextInput
                     placeholder="email"
                     value={email}
-                    onChangeText={text => setEmail(text) } //anytime text changes, we set the email to that text
+                    onChangeText={text => setEmail(text)} //anytime text changes, we set the email to that text
                     style={styles.input}
                 />
                 <TextInput
@@ -45,11 +70,11 @@ const Login = () => {
             </View>
 
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Login</Text>  
+                <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                    <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, styles.buttonOutline]} onPress={handleSignUp}>
-                    <Text style={styles.buttonOutlineText}>Register</Text>  
+                    <Text style={styles.buttonOutlineText}>Register</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -64,7 +89,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    inputContainer:{
+    inputContainer: {
         width: "80%"
     },
     input: {
@@ -87,18 +112,18 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: "center"
     },
-    buttonOutline:{
+    buttonOutline: {
         backgroundColor: "white",
         marginTop: 5,
         borderColor: "#27963C",
         borderWidth: 2
     },
-    buttonText:{
+    buttonText: {
         color: "white",
         fontWeight: "700",
         fontSize: 16
     },
-    buttonOutlineText:{
+    buttonOutlineText: {
         color: "#27963C",
         fontWeight: "700",
         fontSize: 16
