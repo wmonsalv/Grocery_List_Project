@@ -1,14 +1,27 @@
+import { useNavigation } from "@react-navigation/native"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import { auth } from "../../firebase"
 
 const PersonalizedList = () => {
 
-    // auth.currentUser?.email displays user currently logged in
+    const navigation = useNavigation()
+
+    const handleSignOut = () => {
+        auth
+        .signOut()
+        .then(() => {
+            navigation.replace("Home")
+        })
+        .catch(error => alert(error.message))
+    }
+
+    // auth.currentUser?.email displays user currently logged in. 
+    //We use a question mark because that tells javascript that this "User.email" might be undefined (which if we leave as is and it is undefined, it will crash our app). Hence, this tells js, if it's undefined, don't check for the email.
 
 return(
     <View style={styles.container}>
        <Text>Email: {auth.currentUser?.email}</Text>  
-       <TouchableOpacity style={styles.button}>
+       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
        </TouchableOpacity>
     </View>

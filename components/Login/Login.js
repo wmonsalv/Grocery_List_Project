@@ -15,7 +15,7 @@ const Login = () => {
     useEffect(() => { //these lines of code make sure to stop the listener once we leave the screen
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.navigate("User lists")
+                navigation.replace("User lists")
             }
         })
         return unsubscribe
