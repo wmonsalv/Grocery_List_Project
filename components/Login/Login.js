@@ -1,11 +1,27 @@
-import { KeyboardAvoidingView, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import { Alert, KeyboardAvoidingView, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import {useState} from 'react'
 import { TextInput } from 'react-native-paper'
+import { auth } from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 
 const Login = () => {
 
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
+
+    const handleSignUp = () => {
+        auth
+        .createUserWithEmailAndPassword(email, password)  //creates user with email and password we just provided
+        .then(userCredentials => {
+                const user = userCredentials.user
+                console.log(user.email)
+            })
+        .catch(error => alert(error.message()))
+
+        Alert.alert("Account was registered successfully")
+
+        setEmail("")
+        setPassword("")
+    }
 
     return (
 
@@ -32,7 +48,7 @@ const Login = () => {
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>Login</Text>  
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.buttonOutline]}>
+                <TouchableOpacity style={[styles.button, styles.buttonOutline]} onPress={handleSignUp}>
                     <Text style={styles.buttonOutlineText}>Register</Text>  
                 </TouchableOpacity>
             </View>
