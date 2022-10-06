@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     flex: 5,
   },
   saveIcon: {
-    left: 90
+    left: 85
   
   }
 
