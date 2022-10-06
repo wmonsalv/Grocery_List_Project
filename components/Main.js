@@ -11,14 +11,12 @@ import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
 import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/ItemInput.js"
 
-//you can only delete them off the list once you have checked them off
+//Just to make sure I'm on the firebase V2 test 2
 
 function Main() {
 
   const [listOfItems, setListofItems] = useState([
 
-    { key: 1, text: "Tacos", completed: true },
-    { key: 2, text: "Cheese", completed: false }
   ])
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")
@@ -99,6 +97,9 @@ function Main() {
         <Text style={{ fontWeight: "bold", fontSize: 20, color: "black" }}>
           Shopping List
         </Text>
+        <TouchableOpacity style={styles.saveIcon}>
+          <SaveList/>
+        </TouchableOpacity>
         <TouchableOpacity onPress={clearList}>
           <RemoveList />
         </TouchableOpacity>
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     position: "absolute",
-    bottom: 0,
+    bottom: 30,
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
@@ -184,6 +185,10 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 5,
+  },
+  saveIcon: {
+    left: 90
+  
   }
 
 });
