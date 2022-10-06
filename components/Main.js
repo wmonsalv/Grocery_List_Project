@@ -97,6 +97,9 @@ function Main() {
         <Text style={{ fontWeight: "bold", fontSize: 20, color: "black" }}>
           Shopping List
         </Text>
+        <TouchableOpacity style={styles.saveIcon}>
+          <SaveList/>
+        </TouchableOpacity>
         <TouchableOpacity onPress={clearList}>
           <RemoveList />
         </TouchableOpacity>
@@ -182,6 +185,10 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 5,
+  },
+  saveIcon: {
+    left: 90
+  
   }
 
 });
