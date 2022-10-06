@@ -17,8 +17,6 @@ function Main() {
 
   const [listOfItems, setListofItems] = useState([
 
-    { key: 1, text: "Tacos", completed: true },
-    { key: 2, text: "Cheese", completed: false }
   ])
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")

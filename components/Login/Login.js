@@ -4,6 +4,7 @@ import { TextInput } from 'react-native-paper'
 import { auth } from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 import { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import User from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Icons/User.js"
 
 const Login = () => {
 
@@ -54,6 +55,10 @@ const Login = () => {
             style={styles.container}
             behavior="padding">
             <View style={styles.inputContainer}>
+            <View style={styles.icon}>
+            <User/>
+            </View>
+           
                 <TextInput
                     placeholder="email"
                     value={email}
@@ -87,10 +92,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        backgroundColor: "#F0F0F0"
     },
     inputContainer: {
-        width: "80%"
+        width: "80%",
     },
     input: {
         backgroundColor: "white",
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
         width: "60%",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 40
+        marginTop: 25
     },
     button: {
         backgroundColor: "#27963C",
@@ -127,6 +133,11 @@ const styles = StyleSheet.create({
         color: "#27963C",
         fontWeight: "700",
         fontSize: 16
+    },
+    icon: {
+        position: "absolute",
+        bottom: 92,
+        left: 45
     }
 
 })

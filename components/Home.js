@@ -1,5 +1,4 @@
 import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native"
-import HomeButton from "./HomeButton"
 
 //this is just a test to make sure that I'm on the firebase branch 
 
