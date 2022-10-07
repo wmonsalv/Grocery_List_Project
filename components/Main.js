@@ -86,6 +86,14 @@ function Main() {
 
   }
 
+  // function writeUserData(listOfItems, name) {
+  //   firebase.database().ref('users/' + userId).set({
+  //     list: listOfItems,
+  //     listName: name,
+  //   });
+  // }
+  
+
 
   //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
 
