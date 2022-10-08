@@ -95,8 +95,13 @@ function Main() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ededed" }}>
       <View style={styles.header}>
         <Text style={{ fontWeight: "bold", fontSize: 20, color: "black" }}>
-          Shopping List
+          Shopping List:
         </Text>
+        <TextInput
+            style={styles.titleInput}
+            // value={enteredItemText}
+            // onChangeText={listInputHandler}
+            placeholder= "Name" />
         <TouchableOpacity style={styles.saveIcon}>
           <SaveList/>
         </TouchableOpacity>
@@ -136,6 +141,7 @@ function Main() {
 
 const styles = StyleSheet.create({
   header: {
+    backgroundColor:"#E0E0E0",
     padding: 20,
     flexDirection: "row",
     alignItems: "center",
@@ -187,8 +193,16 @@ const styles = StyleSheet.create({
     flex: 5,
   },
   saveIcon: {
-    left: 85
+    left: 20
   
+  },
+  titleInput: {
+    backgroundColor: "#E0E0E0",
+    marginLeft: 0,
+    width: "30%",
+    right: 20,
+    fontSize: 17,
+    fontWeight: "bold"
   }
 
 });
