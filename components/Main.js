@@ -23,8 +23,14 @@ function Main() {
 
   const [enteredItemText, setEnteredItemText] = useState("")
 
+  const [enteredTitle, setTitle] = useState("")
+
   function listInputHandler(enteredText) {
     setEnteredItemText(enteredText)
+  }
+
+  function titleInputHandler(enteredTitle) {
+    setTitle(enteredTitle)
   }
 
   function addItemHandler() {
@@ -99,8 +105,8 @@ function Main() {
         </Text>
         <TextInput
             style={styles.titleInput}
-            // value={enteredItemText}
-            // onChangeText={listInputHandler}
+            value={enteredTitle}
+            onChangeText={titleInputHandler}
             placeholder= "Name" />
         <TouchableOpacity style={styles.saveIcon}>
           <SaveList/>
