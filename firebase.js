@@ -15,7 +15,8 @@ const firebaseConfig = {
   storageBucket: "shopping-list-484d2.appspot.com",
   messagingSenderId: "159872645147",
   appId: "1:159872645147:web:91547bc71c1048ed4d20be",
-  measurementId: "G-82CX85TZT3"
+  measurementId: "G-82CX85TZT3",
+  databaseURL: "https://shopping-list-484d2-default-rtdb.firebaseio.com/"
 };
 
 // Initialize Firebase
@@ -27,7 +28,33 @@ if(firebase.apps.length === 0) {
 }
 
 const auth = firebase.auth()
-const database = firebase.database();
+//const database = firebase.database();
+
+function writeUserData(name, list) {
+  firebase.database().ref('Lists/' + name).set({
+    shoppingList: list
+  });
+}
+
+let myList = [
+  {key: Math.random(),
+  text: "chicken",
+  completed: false}, 
+  {key: Math.random(),
+    text: "Cheese",
+    completed: false}, ]
+
+  let xmasList = [
+      {key: Math.random(),
+      text: "Ham",
+      completed: false}, 
+      {key: Math.random(),
+        text: "pie",
+        completed: false}, ]
+
+writeUserData("summer", myList);
+writeUserData("Xmas", xmasList);
+
 
 export {auth}
 
