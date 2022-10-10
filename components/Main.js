@@ -9,7 +9,9 @@ import PlusCircle from './Icons/PlusCircle';
 import { StyleSheet, View, SafeAreaView, Text, Button, FlatList, TouchableOpacity, Alert, DialogInput} from 'react-native';
 import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
-import ItemInput from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/ItemInput.js"
+import * as firebase from "firebase";
+import "firebase/database";
+import {auth} from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 
 //Just to make sure I'm on the firebase V2 test 2
 
@@ -18,6 +20,8 @@ function Main() {
   const [listOfItems, setListofItems] = useState([
 
   ])
+
+  const user = firebase.auth().currentUser;
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")
 
@@ -92,6 +96,25 @@ function Main() {
 
   }
 
+  let userEmail = auth.currentUser?.email
+
+  function writeUserData(userEmail, name, list) {
+    firebase.database().ref('Lists/' + userEmail).set({
+      list_name: name,
+      shoppingList: list
+    })
+  }
+
+  function storingDataHandler() {
+    const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '');
+    writeUserData(noSpecialCharacters,enteredTitle, listOfItems);
+    setTitle("")
+    setListofItems([])
+  }
+  
+
+  
+
 
   //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
 
@@ -108,7 +131,7 @@ function Main() {
             value={enteredTitle}
             onChangeText={titleInputHandler}
             placeholder= "Name" />
-        <TouchableOpacity style={styles.saveIcon}>
+        <TouchableOpacity onPress={storingDataHandler} style={styles.saveIcon}>
           <SaveList/>
         </TouchableOpacity>
         <TouchableOpacity onPress={clearList}>
