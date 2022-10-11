@@ -99,8 +99,7 @@ function Main() {
   let userEmail = auth.currentUser?.email
 
   function writeUserData(userEmail, name, list) {
-    firebase.database().ref('users/' + userEmail).set({
-      list_name: name,
+    firebase.database().ref('users/' + userEmail ).child(name).push().set({
       shoppingList: list
     })
   }
