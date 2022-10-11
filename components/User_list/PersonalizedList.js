@@ -44,7 +44,7 @@ const PersonalizedList = () => {
                 <FlatList style={{ height: "100%" }} numColumns={1} renderItem={({ item }) => (
                     <Pressable styles={styles.pressableContainer}>
                         <View style={styles.innerContainer}>
-                            <Text>{data}</Text>
+                            <Text>{item.data.name}</Text>
                         </View>
                     </Pressable>
                 )
