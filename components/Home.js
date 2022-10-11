@@ -1,25 +1,42 @@
+import { useState } from "react"
 import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { auth } from "../firebase"
 
-//this is just a test to make sure that I'm on the firebase branch 
+//line of code auth.onAuthStateChanged helps track user login status
 
 
-function Home({navigation}) {
 
-    return(
+function Home({ navigation }) {
+
+    const [userStatus, setUserStatus] = useState("")
+
+    auth.onAuthStateChanged(user => {
+        if (user) {
+            setUserStatus(true)
+        } else {
+            setUserStatus(false)
+        }
+    })
+
+
+    return (
 
         <View style={styles.Background}>
-        <Image style={styles.imageEdit} source={require("/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/assets/images/ShoppingList.png")}/>
-        <View style={styles.buttonContainer} >
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Make a List")}>
-        <Text style={styles.buttonText}>Make a List</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
-        <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        </View>
+            <Image style={styles.imageEdit} source={require("/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/assets/images/ShoppingList.png")} />
+            <View style={styles.buttonContainer} >
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Make a List")}>
+                    <Text style={styles.buttonText}>Make a List</Text>
+                </TouchableOpacity>
+                {userStatus ? <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
+                    <Text style={styles.buttonText}>User menu</Text>
+                </TouchableOpacity> :
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
+                        <Text style={styles.buttonText}>Login</Text>
+                    </TouchableOpacity>}
+            </View>
         </View>
     )
-     
+
 
 
 }
@@ -28,13 +45,13 @@ const styles = StyleSheet.create({
     imageEdit: {
         justifyContent: 'center',
     },
-    justifyContents : {
-        flex : 2,
+    justifyContents: {
+        flex: 2,
         alignItems: "center",
         bottom: 50
     },
     Background: {
-        justifycontent:"center",
+        justifycontent: "center",
         alignItems: 'center',
         backgroundColor: "#27963C",
         height: "100%",
@@ -61,7 +78,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         marginTop: 425
     },
-    })
+})
 
 export default Home
 
