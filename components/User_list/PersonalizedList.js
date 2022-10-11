@@ -27,11 +27,17 @@ const PersonalizedList = () => {
 
     const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
 
-    var starCountRef = firebase.database().ref('users/' + noSpecialCharacters);
-    starCountRef.on('value', (snapshot) => {
-        const data = snapshot.val();
-        console.log(data)
+    const dbRef = firebase.database().ref();
+    dbRef.child("users").child(noSpecialCharacters).get().then((snapshot) => {
+        if (snapshot.exists()) {
+            console.log(snapshot.val());
+        } else {
+            console.log("No data available");
+        }
+    }).catch((error) => {
+        console.error(error);
     });
+
 
 
     return (
@@ -44,7 +50,7 @@ const PersonalizedList = () => {
                 <FlatList style={{ height: "100%" }} numColumns={1} renderItem={({ item }) => (
                     <Pressable styles={styles.pressableContainer}>
                         <View style={styles.innerContainer}>
-                            <Text>{item.data.name}</Text>
+                            <Text>{ }</Text>
                         </View>
                     </Pressable>
                 )

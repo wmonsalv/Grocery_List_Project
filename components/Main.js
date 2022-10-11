@@ -123,7 +123,7 @@ function Main() {
 
     <SafeAreaView style={{ flex: 1, backgroundColor: "#ededed" }}>
       <View style={styles.header}>
-        <Text style={{ fontWeight: "bold", fontSize: 20, color: "black" }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18, color: "black" }}>
           Shopping List:
         </Text>
         <TextInput
@@ -228,10 +228,11 @@ const styles = StyleSheet.create({
   titleInput: {
     backgroundColor: "#E0E0E0",
     marginLeft: 0,
-    width: "30%",
+    width: "32%",
     right: 20,
-    fontSize: 17,
-    fontWeight: "bold"
+    fontSize: 16,
+    fontWeight: "bold",
+    marginLeft: 0,
   }
 
 });

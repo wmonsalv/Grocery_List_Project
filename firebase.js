@@ -28,32 +28,7 @@ if(firebase.apps.length === 0) {
 }
 
 const auth = firebase.auth()
-//const database = firebase.database();
 
-// function writeUserData(name, list) {
-//   firebase.database().ref('Lists/' + name).set({
-//     shoppingList: list
-//   });
-// }
-
-// let myList = [
-//   {key: Math.random(),
-//   text: "chicken",
-//   completed: false}, 
-//   {key: Math.random(),
-//     text: "Cheese",
-//     completed: false}, ]
-
-//   let xmasList = [
-//       {key: Math.random(),
-//       text: "Ham",
-//       completed: false}, 
-//       {key: Math.random(),
-//         text: "pie",
-//         completed: false}, ]
-
-// writeUserData("summer", myList);
-// writeUserData("Xmas", myList);
 
 
 export {auth}
