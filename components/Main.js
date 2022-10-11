@@ -109,6 +109,7 @@ function Main() {
     writeUserData(noSpecialCharacters,enteredTitle, listOfItems);
     setTitle("")
     setListofItems([])
+    Alert.alert("List was saved successfully")
   }
   
 
