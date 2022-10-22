@@ -1,4 +1,4 @@
-import { View, TextInput, Button, StyleSheet, Modal, Image } from "react-native"
+import { View, TextInput, StyleSheet, Modal, Image } from "react-native"
 import { useState } from "react"
 import PaperComponent from "./PaperComponent"
 

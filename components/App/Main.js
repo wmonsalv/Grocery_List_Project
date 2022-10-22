@@ -1,19 +1,13 @@
-// import { Icon } from 'react-native-vector-icons';
-//import { style } from '@mui/system';
-
 import { useState } from 'react';
-import RemoveList from './Icons/RemoveList';
-import SaveList from './Icons/SaveList';
-import IconPlus from './Icons/IconPlus';
-import PlusCircle from './Icons/PlusCircle';
-import { StyleSheet, View, SafeAreaView, Text, Button, FlatList, TouchableOpacity, Alert, DialogInput} from 'react-native';
+import RemoveList from '../Icons/RemoveList';
+import SaveList from '../Icons/SaveList';
+import PlusCircle from '../Icons/PlusCircle';
+import { StyleSheet, View, SafeAreaView, Text, FlatList, TouchableOpacity, Alert} from 'react-native';
 import { TextInput } from 'react-native-paper';
-import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/GroceryItem.js"
+import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/App/GroceryItem.js"
 import * as firebase from "firebase";
 import "firebase/database";
 import {auth} from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
-
-//Just to make sure I'm on the firebase V2 test 2
 
 function Main() {
 

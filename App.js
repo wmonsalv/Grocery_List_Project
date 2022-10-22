@@ -1,7 +1,7 @@
-import Main from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Main.js";
+import Main from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/App/Main.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Home.js";
+import Home from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Landing_Page/Home.js";
 import Login from "./components/Login/Login";
 import PersonalizedList from "./components/User_list/PersonalizedList";
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native"
-import { auth } from "../firebase"
+import { auth } from "../../firebase"
 
 //line of code auth.onAuthStateChanged helps track user login status
 

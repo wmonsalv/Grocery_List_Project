@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, Pressable, TouchableOpacity  } from "react-native"
-import IconOne from "./Icons/IconOne"
-import Check from "./Icons/Check"
+import IconOne from "../Icons/IconOne"
+import Check from "../Icons/Check"
 
 //The data from the app component is passed down onto the onPress attribute on pressable through props
 
