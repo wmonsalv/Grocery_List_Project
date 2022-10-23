@@ -22,6 +22,7 @@ const PersonalizedList = () => {
 
     // auth.currentUser?.email displays user currently logged in. 
     //We use a question mark because that tells javascript that this "User.email" might be undefined (which if we leave as is and it is undefined, it will crash our app). Hence, this tells js, if it's undefined, don't check for the email.
+    //this is the firebase v9 branch 
 
     let userEmail = auth.currentUser?.email
 
