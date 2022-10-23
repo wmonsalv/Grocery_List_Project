@@ -5,9 +5,10 @@ import PlusCircle from '../Icons/PlusCircle';
 import { StyleSheet, View, SafeAreaView, Text, FlatList, TouchableOpacity, Alert} from 'react-native';
 import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/App/GroceryItem.js"
-import * as firebase from "firebase";
-import "firebase/database";
 import {auth} from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
+import { firebase } from 'firebase/app';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
 function Main() {
 
@@ -15,7 +16,7 @@ function Main() {
 
   ])
 
-  const user = firebase.auth().currentUser;
+  const user = getAuth().currentUser;
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")
 
@@ -90,15 +91,24 @@ function Main() {
 
   }
 
-  let userEmail = auth.currentUser?.email
+    const userEmail = auth.currentUser?.email
+    const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
+
+  // function writeUserData(userEmail, name, list) {
+  //   firebase.database().ref('users/' + userEmail ).child(name).push().set({
+  //     shoppingList: {
+  //       list
+  //     },
+  //     listName: name
+  //   })
+  // }
 
   function writeUserData(userEmail, name, list) {
-    firebase.database().ref('users/' + userEmail ).child(name).push().set({
-      shoppingList: {
-        list
-      },
-      listName: name
-    })
+    const db = getDatabase();
+    set(ref(db, 'users/' + userEmail), {
+      username: name,
+      groceryList : list
+    });
   }
 
   function storingDataHandler() {

@@ -5,6 +5,8 @@ import { auth } from "/Users/william_x1/Documents/GitHub/expenses-app-main/Groce
 import { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import User from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Icons/User.js"
+import { getAuth, createUserWithEmailAndPassword,  signInWithEmailAndPassword} from "firebase/auth";
+
 
 const Login = () => {
 
@@ -23,28 +25,33 @@ const Login = () => {
     }, []) //we pass in an empty array so that it only runs once at the beginning 
 
     const handleSignUp = () => {
-        auth
-            .createUserWithEmailAndPassword(email, password)  //creates user with email and password we just provided
-            .then(userCredentials => {
-                const user = userCredentials.user
-                console.log("Registered with: ", user.email)
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
             })
-            .catch(error => alert(error.message()))
-
-        Alert.alert("Account was registered successfully")
-
-        setEmail("")
-        setPassword("")
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+            });
     }
 
     const handleLogin = () => {
-        auth
-            .signInWithEmailAndPassword(email, password)
-            .then(userCredentials => {
-                const user = userCredentials.user
-                console.log("Logged in with: ", user.email)
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
             })
-            .catch(error => alert(error.message()))
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+
         setEmail("")
         setPassword("")
     }
@@ -55,10 +62,10 @@ const Login = () => {
             style={styles.container}
             behavior="padding">
             <View style={styles.inputContainer}>
-            <View style={styles.icon}>
-            <User/>
-            </View>
-           
+                <View style={styles.icon}>
+                    <User />
+                </View>
+
                 <TextInput
                     placeholder="email"
                     value={email}

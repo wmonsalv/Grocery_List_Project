@@ -1,22 +1,25 @@
 import { useState } from "react"
 import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native"
-import { auth } from "../../firebase"
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 //line of code auth.onAuthStateChanged helps track user login status
-
-
 
 function Home({ navigation }) {
 
     const [userStatus, setUserStatus] = useState("")
 
-    auth.onAuthStateChanged(user => {
+    const auth = getAuth();
+    console.log(auth.currentUser?.email)
+    onAuthStateChanged(auth, (user) => {
         if (user) {
             setUserStatus(true)
+            const uid = user.uid;
+            // ...
         } else {
+            // User is signed out
             setUserStatus(false)
         }
-    })
+    });
 
 
     return (

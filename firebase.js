@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
-import * as firebase from "firebase";
-import "firebase/database";
+import { initializeApp} from 'firebase/app';
+import { getFirestore} from 'firebase/firestore/lite';
+import { getAuth } from "firebase/auth";
+import "firebase/auth";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -19,15 +21,11 @@ const firebaseConfig = {
   databaseURL: "https://shopping-list-484d2-default-rtdb.firebaseio.com/"
 };
 
-// Initialize Firebase
-let app
-if(firebase.apps.length === 0) {
-  app = firebase.initializeApp(firebaseConfig);  //this initializes app with the firebase config from above
-} else{                                          //if the app has not been initialized, meaning that app length > 0 ,then 
-  app = firebase.app()
-}
+// Initialize Firebase Authentication and get a reference to the service
 
-const auth = firebase.auth()
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 
 

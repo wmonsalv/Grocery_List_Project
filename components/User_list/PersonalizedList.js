@@ -2,8 +2,9 @@ import { useNavigation } from "@react-navigation/native"
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Pressable } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { auth } from "../../firebase"
-import * as firebase from "firebase";
 import { useState } from "react"
+import { getDatabase, ref, child, get } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const PersonalizedList = () => {
 
@@ -24,12 +25,13 @@ const PersonalizedList = () => {
     //We use a question mark because that tells javascript that this "User.email" might be undefined (which if we leave as is and it is undefined, it will crash our app). Hence, this tells js, if it's undefined, don't check for the email.
     //this is the firebase v9 branch 
 
-    let userEmail = auth.currentUser?.email
-
+    const auth = getAuth();
+    const userEmail = auth.currentUser?.email
     const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
 
-    const dbRef = firebase.database().ref();
-    dbRef.child("users").child(noSpecialCharacters).get().then((snapshot) => {
+    
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
         if (snapshot.exists()) {
             console.log(snapshot.val());
         } else {
