@@ -94,7 +94,10 @@ function Main() {
 
   function writeUserData(userEmail, name, list) {
     firebase.database().ref('users/' + userEmail ).child(name).push().set({
-      shoppingList: list
+      shoppingList: {
+        list
+      },
+      listName: name
     })
   }
 
