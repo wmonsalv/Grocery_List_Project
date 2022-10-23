@@ -2,9 +2,10 @@ import { useNavigation } from "@react-navigation/native"
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Pressable } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { auth } from "../../firebase"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { getDatabase, ref, child, get } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import db from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 
 const PersonalizedList = () => {
 
@@ -40,7 +41,6 @@ const PersonalizedList = () => {
     }).catch((error) => {
         console.error(error);
     });
-
 
 
     return (
