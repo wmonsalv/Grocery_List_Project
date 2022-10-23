@@ -2,13 +2,13 @@ import { useState } from 'react';
 import RemoveList from '../Icons/RemoveList';
 import SaveList from '../Icons/SaveList';
 import PlusCircle from '../Icons/PlusCircle';
-import { StyleSheet, View, SafeAreaView, Text, FlatList, TouchableOpacity, Alert} from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import GroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/App/GroceryItem.js"
-import {auth} from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
+import { auth } from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 import { firebase } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, push} from "firebase/database";
 
 function Main() {
 
@@ -91,8 +91,8 @@ function Main() {
 
   }
 
-    const userEmail = auth.currentUser?.email
-    const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
+  // const userEmail = auth.currentUser?.email
+  // const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
 
   // function writeUserData(userEmail, name, list) {
   //   firebase.database().ref('users/' + userEmail ).child(name).push().set({
@@ -103,24 +103,26 @@ function Main() {
   //   })
   // }
 
-  function writeUserData(userEmail, name, list) {
+  function writeUserData( userEmail, name, list) {
+    // // Create a new post reference with an auto-generated id
     const db = getDatabase();
-    set(ref(db, 'users/' + userEmail), {
-      username: name,
-      groceryList : list
+    push(ref(db, 'users/' + userEmail), {
+      listName: name,
+      GroceryList: list,
     });
   }
 
   function storingDataHandler() {
+    const userEmail = auth.currentUser?.email
     const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '');
-    writeUserData(noSpecialCharacters,enteredTitle, listOfItems);
+    writeUserData(noSpecialCharacters, enteredTitle, listOfItems);
     setTitle("")
     setListofItems([])
     Alert.alert("List was saved successfully")
   }
-  
 
-  
+
+
 
 
   //Here, I'm using the onDelete prop to pass down the deleteHandler function to the GroceryItem component so that items are deleted when clicked
@@ -134,12 +136,12 @@ function Main() {
           Shopping List:
         </Text>
         <TextInput
-            style={styles.titleInput}
-            value={enteredTitle}
-            onChangeText={titleInputHandler}
-            placeholder= "Name" />
+          style={styles.titleInput}
+          value={enteredTitle}
+          onChangeText={titleInputHandler}
+          placeholder="Name" />
         <TouchableOpacity onPress={storingDataHandler} style={styles.saveIcon}>
-          <SaveList/>
+          <SaveList />
         </TouchableOpacity>
         <TouchableOpacity onPress={clearList}>
           <RemoveList />
@@ -177,7 +179,7 @@ function Main() {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor:"#E0E0E0",
+    backgroundColor: "#E0E0E0",
     padding: 20,
     flexDirection: "row",
     alignItems: "center",
@@ -230,7 +232,7 @@ const styles = StyleSheet.create({
   },
   saveIcon: {
     left: 20
-  
+
   },
   titleInput: {
     backgroundColor: "#E0E0E0",

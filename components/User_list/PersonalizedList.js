@@ -33,7 +33,7 @@ const PersonalizedList = () => {
     const dbRef = ref(getDatabase());
     get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
         if (snapshot.exists()) {
-            console.log(snapshot.val());
+            console.log(snapshot.val());    
         } else {
             console.log("No data available");
         }
