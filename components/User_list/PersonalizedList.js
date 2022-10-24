@@ -9,7 +9,7 @@ import db from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_Lis
 
 const PersonalizedList = () => {
 
-    const [listName, setListName] = useState("")
+    const [listName, setListName] = useState([{name: " "}])
 
     const navigation = useNavigation()
 
@@ -34,7 +34,18 @@ const PersonalizedList = () => {
     const dbRef = ref(getDatabase());
     get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
         if (snapshot.exists()) {
-            console.log(snapshot.val());    
+         snapshot.forEach(childSnapShot => {
+            let keyName = childSnapShot.key //gives me doc id
+            // console.log(keyName)
+            let data = childSnapShot.val()
+            let listName = data.listName //gets me the list name 
+            console.log(listName)
+            // let groceryList = data.groceryList  doesn't really get me the list, I may have to map its contents 
+            // console.log(groceryList)
+
+         }); 
+            // setListName(childSnapShot.val())
+            // console.log(listName)
         } else {
             console.log("No data available");
         }
