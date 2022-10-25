@@ -7,9 +7,10 @@ import { getDatabase, ref, child, get } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import db from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 
+
 const PersonalizedList = () => {
 
-    const [listName, setListName] = useState([{name: " "}])
+    //const [listName, setListName] = useState([{name: " "}])
 
     const navigation = useNavigation()
 
@@ -36,16 +37,17 @@ const PersonalizedList = () => {
         if (snapshot.exists()) {
          snapshot.forEach(childSnapShot => {
             let keyName = childSnapShot.key //gives me doc id
-            // console.log(keyName)
+            console.log(keyName)
             let data = childSnapShot.val()
             let listName = data.listName //gets me the list name 
             console.log(listName)
-            // let groceryList = data.groceryList  doesn't really get me the list, I may have to map its contents 
-            // console.log(groceryList)
-
+            let groceryList = data.GroceryList //gets me the list for each doc  
+            //console.log(groceryList.map(item => item.text))  //this simply prints the values, but it shows that we can extract the values
+            const updatedList = groceryList.map(item => item.text) // [works by assigning it to a variable, which means that we can assign it to state]
+            console.log(updatedList)
+           
          }); 
-            // setListName(childSnapShot.val())
-            // console.log(listName)
+    
         } else {
             console.log("No data available");
         }
