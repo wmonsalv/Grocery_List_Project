@@ -6,7 +6,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function Home({ navigation }) {
 
-    const [userStatus, setUserStatus] = useState("")
+    const [userStatus, setUserStatus] = useState(false)
+    const [currentUser, setCurrentUser] = useState("No Active User")
 
     const auth = getAuth();
     
@@ -22,9 +23,15 @@ function Home({ navigation }) {
             }
         })
     }, [])
+
+    useEffect(() => { //seems like useEffect works, but it only does it only works on one state at a time 
+        if(userStatus){
+            setCurrentUser(auth.currentUser?.email) 
+        }
+    }, [userStatus]) //I'm leaving the name of the userStatus inside the brackets becuase we want to rerender if there are changes on that variable
     
 
-    console.log(auth.currentUser?.email)
+    console.log(currentUser)
 
 
     return (
