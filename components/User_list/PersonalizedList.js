@@ -14,7 +14,9 @@ const PersonalizedList = () => {
 
     const navigation = useNavigation()
 
-    const [currentUser, setCurrentUser] = useState("No active user")
+    const [currentUser, setCurrentUser] = useState("No active user") //shows up at the top of the screen
+
+    const [FirebaseData, setFirebaseData] = useState([])
 
     const handleSignOut = () => {
         auth
@@ -34,34 +36,49 @@ const PersonalizedList = () => {
     const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
 
     useEffect(() => {
-        if(auth.currentUser?.email){
+        if (auth.currentUser?.email) {
             setCurrentUser(auth.currentUser?.email)
         }
-      }, []);
+    }, []);
 
-    
+
     const dbRef = ref(getDatabase());
     get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
         if (snapshot.exists()) {
-         snapshot.forEach(childSnapShot => {
-            let keyName = childSnapShot.key //gives me doc id
-            console.log(keyName)
-            let data = childSnapShot.val()
-            let listName = data.listName //gets me the list name 
-            console.log(listName)
-            let groceryList = data.GroceryList //gets me the list for each doc  
-            //console.log(groceryList.map(item => item.text))  //this simply prints the values, but it shows that we can extract the values
-            const updatedList = groceryList.map(item => item.text) // [works by assigning it to a variable, which means that we can assign it to state]
-            console.log(updatedList)
-           
-         }); 
-    
+            snapshot.forEach(childSnapShot => {
+                let keyName = childSnapShot.key //gives me doc id
+                //console.log(keyName)
+                let data = childSnapShot.val()
+                let listName = data.listName //gets me the list name 
+                // console.log(listName)
+                // let groceryList = data.GroceryList //gets me the list for each doc  
+                // //console.log(groceryList.map(item => item.text))  //this simply prints the values, but it shows that we can extract the values
+                // const updatedList = groceryList.map(item => item.text) // [works by assigning it to a variable, which means that we can assign it to state]
+                // console.log(updatedList)
+
+            });
+
         } else {
             console.log("No data available");
         }
     }).catch((error) => {
         console.error(error);
     });
+
+    useEffect(() => {
+
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
+            snapshot.forEach(childSnapShot => {
+                let data = childSnapShot.val()
+                setFirebaseData(FirebaseData => [...FirebaseData, data])
+            })
+        })
+
+    }, [])
+
+    //console.log(FirebaseData.map(FirebaseData => FirebaseData.GroceryList))  //I'm taking the whole snapshot and assigning it to state. So far, it doesn't seem like I'm encountering any problems.
+
 
 
     return (
@@ -74,8 +91,10 @@ const PersonalizedList = () => {
                 <FlatList style={{ height: "100%" }} numColumns={1} renderItem={({ item }) => (
                     <Pressable styles={styles.pressableContainer}>
                         <View style={styles.innerContainer}>
-    
-                            <Text>{ }</Text>
+
+                            {listName.map((item) => (
+                                <Text>{item.listName}</Text>
+                            ))}
                         </View>
                     </Pressable>
                 )
