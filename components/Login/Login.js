@@ -14,6 +14,7 @@ const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    
 
     useEffect(() => { //these lines of code make sure to stop the listener once we leave the screen
         const unsubscribe = auth.onAuthStateChanged(user => {

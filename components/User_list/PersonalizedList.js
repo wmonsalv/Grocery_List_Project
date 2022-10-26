@@ -14,6 +14,8 @@ const PersonalizedList = () => {
 
     const navigation = useNavigation()
 
+    const [currentUser, setCurrentUser] = useState("No active user")
+
     const handleSignOut = () => {
         auth
             .signOut()
@@ -30,6 +32,12 @@ const PersonalizedList = () => {
     const auth = getAuth();
     const userEmail = auth.currentUser?.email
     const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
+
+    useEffect(() => {
+        if(auth.currentUser?.email){
+            setCurrentUser(auth.currentUser?.email)
+        }
+      }, []);
 
     
     const dbRef = ref(getDatabase());
@@ -60,12 +68,13 @@ const PersonalizedList = () => {
 
         <SafeAreaView style={{ flex: 1, backgroundColor: "#ededed" }}>
             <View style={styles.header}>
-                <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>Email: {auth.currentUser?.email}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>Email: {currentUser}</Text>
             </View>
             <View style={{ flex: 1, marginTop: 100 }}>
                 <FlatList style={{ height: "100%" }} numColumns={1} renderItem={({ item }) => (
                     <Pressable styles={styles.pressableContainer}>
                         <View style={styles.innerContainer}>
+    
                             <Text>{ }</Text>
                         </View>
                     </Pressable>

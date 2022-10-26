@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Image, View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -9,17 +9,22 @@ function Home({ navigation }) {
     const [userStatus, setUserStatus] = useState("")
 
     const auth = getAuth();
+    
+    useEffect(() => {     //using useffect, I was able to mitigate how many times we are rendering the username to the screen
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserStatus(true)
+                const uid = user.uid;
+                // ...
+            } else {
+                // User is signed out
+                setUserStatus(false)
+            }
+        })
+    }, [])
+    
+
     console.log(auth.currentUser?.email)
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            setUserStatus(true)
-            const uid = user.uid;
-            // ...
-        } else {
-            // User is signed out
-            setUserStatus(false)
-        }
-    });
 
 
     return (
