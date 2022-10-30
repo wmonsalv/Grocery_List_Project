@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/Landing_Page/Home.js";
 import Login from "./components/Login/Login";
 import PersonalizedList from "./components/User_list/PersonalizedList";
+import UserListData from "./components/User_list/UserListData";
 
 export default function App() {
 
@@ -16,6 +17,7 @@ export default function App() {
                     <Stack.Screen  name="Make a List" component={Main} />
                     <Stack.Screen  name="Login" component={Login} />
                     <Stack.Screen  name="User lists" component={PersonalizedList} />
+                    <Stack.Screen  name="User list Data" component={UserListData} />
                 </Stack.Navigator>
             </NavigationContainer>
            

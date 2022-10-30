@@ -1,12 +1,16 @@
 import { View, Text, StyleSheet} from "react-native"
+import { useNavigation } from "@react-navigation/native"
+
 
 
 function UserLists(props) {
 
+    const navigation = useNavigation()
+
     return (
         <View style={styles.itemListStyles} >
             <View style={{ flex: 1 }}>
-                <Text style={styles.textFontColor}>{props.listNames}</Text>
+                <Text onPress={() => navigation.navigate("User list Data")} style={styles.textFontColor}>{props.listNames}</Text>
             </View>
         </View>
     )
