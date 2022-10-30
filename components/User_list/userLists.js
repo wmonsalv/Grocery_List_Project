@@ -6,10 +6,7 @@ function UserLists(props) {
     return (
         <View style={styles.itemListStyles} >
             <View style={{ flex: 1 }}>
-                <Text style={{
-                    fontWeight: "bold",
-                    fontSize: 15,
-                }}>{props.listNames}</Text>
+                <Text style={styles.textFontColor}>{props.listNames}</Text>
             </View>
         </View>
     )
@@ -22,7 +19,7 @@ export default UserLists
 const styles = StyleSheet.create({
     itemListStyles: {
         margin: 4,
-        padding: 5,
+        padding: 10,
         borderRadius: 7,
         backgroundColor: "#27963C",
         color: "white",
@@ -39,6 +36,6 @@ const styles = StyleSheet.create({
     textFontColor: {
         color: "white",
         fontWeight: "bold",
-        fontSize: 20,
+        fontSize: 15,
     },
 })

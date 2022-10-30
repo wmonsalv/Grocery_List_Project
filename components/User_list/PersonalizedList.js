@@ -6,12 +6,10 @@ import { useState, useEffect } from "react"
 import { getDatabase, ref, child, get } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import db from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
-import UserLists from "./userLists"
+import UserLists from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/User_list/UserLists.js"
 
 
 const PersonalizedList = () => {
-
-    //const [listName, setListName] = useState([{name: " "}])
 
     const navigation = useNavigation()
 
@@ -89,33 +87,20 @@ const PersonalizedList = () => {
             <View style={styles.header}>
                 <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>Email: {currentUser}</Text>
             </View>
-            <View style={styles.innerContainer}>
-                            {FirebaseData.map((FirebaseData) => {
-                                return (
-                                    <UserLists listNames={FirebaseData}/>                         
-                                );
-                            })}
-                        </View>
-            {/* <View style={{ flex: 1, marginTop: 100 }}>
-                <FlatList style={{ height: "100%" }} numColumns={1} renderItem={({ item }) => (
-                    <Pressable styles={styles.pressableContainer}>
-                        <View style={styles.innerContainer}>
-                            {FirebaseData.map((FirebaseData) => {
-                                return (
-                                    // <userLists listNames={listName}/>  
-                                    <Text>{FirebaseData}</Text>                           
-                                );
-                            })}
-                        </View>
-                    </Pressable>
-                )
-                } />
+            <View>
+                {FirebaseData.map((FirebaseData) => {
+                    return (
+                        <TouchableOpacity>
+                            <UserLists listNames={FirebaseData} />
+                        </TouchableOpacity>
+                    );
+                })}
             </View>
             <View style={styles.footer}>
                 <TouchableOpacity onPress={handleSignOut} style={styles.button}>
                     <Text style={styles.buttonText}>Sign out</Text>
                 </TouchableOpacity>
-            </View> */}
+            </View>
         </SafeAreaView>
     )
 
@@ -163,7 +148,7 @@ const styles = StyleSheet.create({
     },
     footer: {
         position: "absolute",
-        bottom: 25,
+        bottom: 45,
         width: "100%",
         flexDirection: "row",
         alignItems: "center",
