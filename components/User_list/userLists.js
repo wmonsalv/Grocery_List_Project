@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet} from "react-native"
 
 
-function userLists(props) {
+function UserLists(props) {
 
     return (
         <View style={styles.itemListStyles} >
@@ -9,7 +9,7 @@ function userLists(props) {
                 <Text style={{
                     fontWeight: "bold",
                     fontSize: 15,
-                }}>{props.lists}</Text>
+                }}>{props.listNames}</Text>
             </View>
         </View>
     )
@@ -17,7 +17,7 @@ function userLists(props) {
 
 
 
-export default userLists
+export default UserLists
 
 const styles = StyleSheet.create({
     itemListStyles: {

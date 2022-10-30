@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { getDatabase, ref, child, get } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import db from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
+import UserLists from "./userLists"
 
 
 const PersonalizedList = () => {
@@ -65,19 +66,20 @@ const PersonalizedList = () => {
         console.error(error);
     });
 
-    useEffect(() => {
+    useEffect(() => { //gets me list of objects 
 
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
             snapshot.forEach(childSnapShot => {
                 let data = childSnapShot.val()
-                setFirebaseData(FirebaseData => [...FirebaseData, data])
+                let listName = data.listName
+                setFirebaseData(current => [...current, listName])
             })
         })
 
     }, [])
 
-    //console.log(FirebaseData.map(FirebaseData => FirebaseData.GroceryList))  //I'm taking the whole snapshot and assigning it to state. So far, it doesn't seem like I'm encountering any problems.
+    console.log(FirebaseData.map(FirebaseData => FirebaseData))  //I'm taking the whole snapshot and assigning it to state. So far, it doesn't seem like I'm encountering any problems.
 
 
 
@@ -87,14 +89,23 @@ const PersonalizedList = () => {
             <View style={styles.header}>
                 <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>Email: {currentUser}</Text>
             </View>
-            <View style={{ flex: 1, marginTop: 100 }}>
+            <View style={styles.innerContainer}>
+                            {FirebaseData.map((FirebaseData) => {
+                                return (
+                                    <UserLists listNames={FirebaseData}/>                         
+                                );
+                            })}
+                        </View>
+            {/* <View style={{ flex: 1, marginTop: 100 }}>
                 <FlatList style={{ height: "100%" }} numColumns={1} renderItem={({ item }) => (
                     <Pressable styles={styles.pressableContainer}>
                         <View style={styles.innerContainer}>
-
-                            {listName.map((item) => (
-                                <Text>{item.listName}</Text>
-                            ))}
+                            {FirebaseData.map((FirebaseData) => {
+                                return (
+                                    // <userLists listNames={listName}/>  
+                                    <Text>{FirebaseData}</Text>                           
+                                );
+                            })}
                         </View>
                     </Pressable>
                 )
@@ -104,7 +115,7 @@ const PersonalizedList = () => {
                 <TouchableOpacity onPress={handleSignOut} style={styles.button}>
                     <Text style={styles.buttonText}>Sign out</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
         </SafeAreaView>
     )
 
