@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet} from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity} from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import Share from "../Icons/Share"
 
 
 
@@ -10,8 +11,11 @@ function UserLists(props) {
     return (
         <View style={styles.itemListStyles} >
             <View style={{ flex: 1 }}>
-                <Text onPress={() => navigation.navigate("User list Data")} style={styles.textFontColor}>{props.listNames}</Text>
+                <Text onPress={() => navigation.navigate("User list Data", {listName: props.listNames, snap: props.snap, current: props.currentListofItems})} style={styles.textFontColor}>{props.listNames}</Text>
             </View>
+            <TouchableOpacity>
+            <Share/>
+            </TouchableOpacity>
         </View>
     )
 }
