@@ -9,7 +9,10 @@ import Check from "../Icons/Check"
 const UserListData = ({ route }) => {
 
 
-    console.log(route.params.current)
+    console.log(route.params.snap.map(item => route.params.snap))
+
+
+
 
     
 

@@ -15,11 +15,11 @@ const PersonalizedList = () => {
 
     const [currentUser, setCurrentUser] = useState("No active user") //shows up at the top of the screen
 
-    const [FirebaseData, setFirebaseData] = useState([]) //this is actually for the users
+    const [FirebaseListNames, setFirebaseListNames] = useState([]) //this is actually list names
 
     const [FirebaseSnap, setFirebaseSnap] = useState([])
 
-    const [itemsOnList, setItemsOnList] = useState([])
+    // const [itemsOnList, setItemsOnList] = useState([])
 
     const handleSignOut = () => {
         auth
@@ -55,7 +55,7 @@ const PersonalizedList = () => {
                 let listName = data.listName //gets me the list name 
                 // console.log(listName)
                 // let groceryList = data.GroceryList //gets me the list for each doc  
-                // //console.log(groceryList.map(item => item.text))  //this simply prints the values, but it shows that we can extract the values
+                // console.log(groceryList.map(item => item.text))  //this simply prints the values, but it shows that we can extract the values
                 // const updatedList = groceryList.map(item => item.text) // [works by assigning it to a variable, which means that we can assign it to state]
                 // console.log(updatedList)
 
@@ -68,7 +68,7 @@ const PersonalizedList = () => {
         console.error(error);
     });
 
-    useEffect(() => { //gets me list of objects 
+    useEffect(() => { //gets me grocery list names
 
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
@@ -76,7 +76,7 @@ const PersonalizedList = () => {
                 let data = childSnapShot.val()
                 let listName = data.listName
                 let groceryList = data.GroceryList
-                setFirebaseData(current => [...current, listName])
+                setFirebaseListNames(current => [...current, listName])
             })
         })
 
@@ -89,34 +89,38 @@ const PersonalizedList = () => {
             snapshot.forEach(childSnapShot => {
                 let data = childSnapShot.val()
                 let groceryList = data.GroceryList
-                setFirebaseSnap(current => [...current, groceryList])
+                console.log(groceryList.map(item => item.text))
+                //setFirebaseSnap(current => [...current, groceryList])
+                //console.log(FirebaseSnap.map(item => item.text))
             })
         })
 
-    }, [])
+    }, [FirebaseListNames])
 
-    useEffect(() => { //gives me the list for current list name
 
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
-            snapshot.forEach(childSnapShot => {
-                let data = childSnapShot.val()
-                let listName = data.listName
-                let groceryList = data.GroceryList
-                setItemsOnList(groceryList)
-            })
-        })
+    // useEffect(() => { //gives me grocery list for a specific listName
 
-    }, [FirebaseData])
+    //     const dbRef = ref(getDatabase());
+    //     get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
+    //         snapshot.forEach(childSnapShot => {
+    //             let data = childSnapShot.val()
+    //             let listName = data.listName
+    //             let groceryList = data.GroceryList
+    //             setItemsOnList(groceryList)
+    //         })
+    //     })
+
+    // }, [FirebaseData])
+
 
     // console.log(FirebaseData.map(FirebaseData => FirebaseData))  //I'm taking the whole snapshot and assigning it to state. So far, it doesn't seem like I'm encountering any problems.
         // console.log(FirebaseSnap) //logs firebase snap
         // console.log(FirebaseSnap.listName)
     // console.log(FirebaseSnap.map(item => item.text)) how you would access the text value on each list 
     // console.log(FirebaseData)
-    //console.log(itemsOnList)
+   // console.log(itemsOnList)
 
-
+ 
     return (
 
         <SafeAreaView style={{ flex: 1, backgroundColor: "#ededed" }}>
@@ -124,10 +128,10 @@ const PersonalizedList = () => {
                 <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>Email: {currentUser}</Text>
             </View>
             <View>
-                {FirebaseData.map((FirebaseData) => {
+                {FirebaseListNames.map((FirebaseListNames) => {
                     return (
                         <TouchableOpacity>
-                            <UserLists currentListofItems={itemsOnList} snap={FirebaseSnap} listNames={FirebaseData} />
+                            <UserLists snap={FirebaseSnap} listNames={FirebaseListNames} />
                         </TouchableOpacity>
                     );
                 })}

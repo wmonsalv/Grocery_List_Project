@@ -11,7 +11,7 @@ function UserLists(props) {
     return (
         <View style={styles.itemListStyles} >
             <View style={{ flex: 1 }}>
-                <Text onPress={() => navigation.navigate("User list Data", {listName: props.listNames, snap: props.snap, current: props.currentListofItems})} style={styles.textFontColor}>{props.listNames}</Text>
+                <Text onPress={() => navigation.navigate("User list Data", {listName: props.listNames, snap: props.snap})} style={styles.textFontColor}>{props.listNames}</Text>
             </View>
             <TouchableOpacity>
             <Share/>
