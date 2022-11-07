@@ -91,17 +91,6 @@ function Main() {
 
   }
 
-  // const userEmail = auth.currentUser?.email
-  // const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
-
-  // function writeUserData(userEmail, name, list) {
-  //   firebase.database().ref('users/' + userEmail ).child(name).push().set({
-  //     shoppingList: {
-  //       list
-  //     },
-  //     listName: name
-  //   })
-  // }
 
   function writeUserData( userEmail, name, list) {
     // // Create a new post reference with an auto-generated id

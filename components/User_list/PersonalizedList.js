@@ -17,7 +17,9 @@ const PersonalizedList = () => {
 
     const [FirebaseListNames, setFirebaseListNames] = useState([]) //this is actually list names
 
-    const [FirebaseSnap, setFirebaseSnap] = useState([])
+    const [FirebaseSnap, setFirebaseSnap] = useState([{name: " ", list: " "}])
+
+    //const [FirebaseData, setFirebaseData] = useState([{listName: " ", listItems: }])
 
     // const [itemsOnList, setItemsOnList] = useState([])
 
@@ -89,15 +91,19 @@ const PersonalizedList = () => {
             snapshot.forEach(childSnapShot => {
                 let data = childSnapShot.val()
                 let groceryList = data.GroceryList
-                console.log(groceryList.map(item => item.text))
-                //setFirebaseSnap(current => [...current, groceryList])
-                //console.log(FirebaseSnap.map(item => item.text))
+                let listName = data.listName
+                //console.log()
+                //console.log(groceryList.map(item => item.text))
+                //setFirebaseSnap(groceryList)
+                setFirebaseSnap({name: listName , list:groceryList})
+               // console.log(FirebaseSnap.map(item => item.text))
             })
         })
 
-    }, [FirebaseListNames])
+    }, [])
 
-
+    //console.log(FirebaseSnap) //-> prints out all grocery lists and the names attached to each list <important>
+    
     // useEffect(() => { //gives me grocery list for a specific listName
 
     //     const dbRef = ref(getDatabase());
@@ -116,7 +122,7 @@ const PersonalizedList = () => {
     // console.log(FirebaseData.map(FirebaseData => FirebaseData))  //I'm taking the whole snapshot and assigning it to state. So far, it doesn't seem like I'm encountering any problems.
         // console.log(FirebaseSnap) //logs firebase snap
         // console.log(FirebaseSnap.listName)
-    // console.log(FirebaseSnap.map(item => item.text)) how you would access the text value on each list 
+    //console.log(FirebaseSnap) //how you would access the text value on each list 
     // console.log(FirebaseData)
    // console.log(itemsOnList)
 

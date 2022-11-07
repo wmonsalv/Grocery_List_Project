@@ -1,7 +1,13 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useState, useEffect } from "react"
 import GroceryItem from "../App/GroceryItem"
 import Check from "../Icons/Check"
+import { getDatabase, ref, child, get } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import db from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
+import { doc, getDoc } from "firebase/firestore";
+import { getFirestore } from 'firebase/firestore'
 
 //I'm using route.params.listName to circumvent passing data to a navigation function 
 //I'm still not understanding the syntax entirely, but I'm able to transfer the data just fine
@@ -9,17 +15,43 @@ import Check from "../Icons/Check"
 const UserListData = ({ route }) => {
 
 
-    console.log(route.params.snap.map(item => route.params.snap))
+    //console.log(route.params.snap)
 
+    const [fireBaseSnap, setfireBaseSnap] = useState([{ name: "", list: "", key: "" }])
 
+    const auth = getAuth();
 
+    const userEmail = auth.currentUser?.email
 
-    
+    const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '')
 
+    useEffect(() => { //I'm doing it for each, because it acts up when I do two state changes at once during a set state operation. This one is supposed to print out grocery items on each list.
 
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
+            snapshot.forEach(childSnapShot => {
+                let data = childSnapShot.val()
+                let keyName = childSnapShot.key
+                let groceryList = data.GroceryList
+                let listName = data.listName
+                setfireBaseSnap((prevListOfItems) => [...prevListOfItems, { name: listName, list: groceryList.map(item => item.text), key: keyName }])
+                
+            })
+        })
 
+    }, [])
 
+    let currentList = route.params.listName
 
+    let filteredList = fireBaseSnap.filter(item => item.name === currentList)
+
+    //(prevListOfItems) => [...prevListOfItems, newItem]
+
+    let items = filteredList.map(item => item.list)
+
+    console.log(items)
+
+    //quick test code, item.list gives me list items, item.name gives me list names, but how do I get singular atributes from the list itself?
 
 
 
@@ -29,15 +61,15 @@ const UserListData = ({ route }) => {
             <View style={styles.header}>
                 <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>List Name: {route.params.listName} </Text>
             </View>
-            {/* <View >
-                {route.params.snap.map((item) => {
+            <View >
+                {items.map((item) => {
                     return (
                         <TouchableOpacity>
-                            <Text>{item.text}</Text>
+                            <Text>{item}</Text>
                         </TouchableOpacity>
                     )
                 })}
-            </View> */}
+            </View>
         </SafeAreaView>
 
 
@@ -101,7 +133,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         elevation: 12,
         marginVertical: 10,
-        textAlign:"center"
+        textAlign: "center"
 
     },
 })
