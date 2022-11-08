@@ -45,17 +45,21 @@ const UserListData = ({ route }) => {
 
     //console.log(fireBaseSnap)
 
-    let filteredList = fireBaseSnap.filter((item) => item.name === currentList)
+    let filteredList = fireBaseSnap.filter((item) => item.name === currentList) //filters the list so that only items from the current list name are returned 
 
-    //(prevListOfItems) => [...prevListOfItems, newItem]
+    let objectArray = filteredList.map(item => item.list) // Assigns the lists to an array of objects of sorts
 
-    //let items = filteredList.map(item => item.list)
+    let arrayOfItemsText = filteredList.map(item => item.list.map(item => item.text)) // Gives me an array of arrays containing the text attribute of each object 
 
-    let arrayOfItems = filteredList.map(item => item.list.map(item => item.text))
+    let flatArrayText = [].concat(...arrayOfItemsText); //this flattens the list into an array of all of the names of the food items on the list for accessibility
 
-    let flatArray = [].concat(...arrayOfItems);
+    let flatArrayobject = [].concat(...objectArray); // This just flattens the list so that I have an array of objects that I can traverse around 
 
-    console.log(flatArray)
+    console.log(flatArrayobject) // This just flattens the list so that I have an array of objects that I can traverse around, this is just testing to see how it looks
+
+    
+
+    //console.log(flatArrayText)
 
     //quick test code, item.list gives me list items, item.name gives me list names, but how do I get singular atributes from the list itself?
 
@@ -68,7 +72,7 @@ const UserListData = ({ route }) => {
                 <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>List Name: {route.params.listName} </Text>
             </View>
             <View >
-                {flatArray.map((item) => {
+                {flatArrayText.map((item) => {
                     return (
                         <TouchableOpacity>
                             <Text>{item}</Text>
