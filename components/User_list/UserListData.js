@@ -8,6 +8,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import db from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 import { doc, getDoc } from "firebase/firestore";
 import { getFirestore } from 'firebase/firestore'
+import UserGroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/User_list/UserGroceryItem.js"
 
 //I'm using route.params.listName to circumvent passing data to a navigation function 
 //I'm still not understanding the syntax entirely, but I'm able to transfer the data just fine
@@ -49,13 +50,13 @@ const UserListData = ({ route }) => {
 
     let objectArray = filteredList.map(item => item.list) // Assigns the lists to an array of objects of sorts
 
-    let arrayOfItemsText = filteredList.map(item => item.list.map(item => item.text)) // Gives me an array of arrays containing the text attribute of each object 
+    // let arrayOfItemsText = filteredList.map(item => item.list.map(item => item.text)) // Gives me an array of arrays containing the text attribute of each object 
 
-    let flatArrayText = [].concat(...arrayOfItemsText); //this flattens the list into an array of all of the names of the food items on the list for accessibility
+    // let flatArrayText = [].concat(...arrayOfItemsText); //this flattens the list into an array of all of the names of the food items on the list for accessibility
 
     let flatArrayobject = [].concat(...objectArray); // This just flattens the list so that I have an array of objects that I can traverse around 
 
-    console.log(flatArrayobject) // This just flattens the list so that I have an array of objects that I can traverse around, this is just testing to see how it looks
+    //console.log(flatArrayobject) // This just flattens the list so that I have an array of objects that I can traverse around, this is just testing to see how it looks
 
     
 
@@ -72,10 +73,10 @@ const UserListData = ({ route }) => {
                 <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>List Name: {route.params.listName} </Text>
             </View>
             <View >
-                {flatArrayText.map((item) => {
+                {flatArrayobject.map((item) => {
                     return (
                         <TouchableOpacity>
-                            <Text>{item}</Text>
+                            <UserGroceryItem completed={item.completed} text={item.text}/>
                         </TouchableOpacity>
                     )
                 })}

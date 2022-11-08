@@ -1,6 +1,18 @@
 import { StyleSheet, View, Text, Pressable, TouchableOpacity  } from "react-native"
+import Check from "../Icons/Check"
+import IconOne from "../Icons/IconOne"
 
 function UserGroceryItem(props){
+
+    const checked = (key) => {
+        const updatedItem = listOfItems.map((item) => {
+          if (item.key === key) {
+            return { ...item, completed: true }
+          }
+          return item;
+        })
+        setListofItems(updatedItem)
+      }
 
 
 
@@ -9,19 +21,11 @@ function UserGroceryItem(props){
         <View style={styles.itemListStyles} >
             <View style={{ flex: 1 }}>        
                 <Text style={{
-                    textDecorationLine: props.data.completed ? "line-through" : "none", color: "white",
+                    textDecorationLine: props.completed ? "line-through" : "none", color: "white",
                     fontWeight: "bold",
                     fontSize: 15,
-                }}>{props.data.text}</Text>
-                </View>
-                {!props.completed?(
-                <TouchableOpacity style={styles.iconCheck} onPress={checked}>
-                <Check/>
-                </TouchableOpacity>)
-                :""} 
-                <TouchableOpacity style={styles.iconX} onPress={deleted}>
-                <IconOne/>
-                </TouchableOpacity>          
+                }}>{props.text}</Text>
+                </View>       
             </View>
 
     )
