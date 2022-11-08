@@ -17,7 +17,7 @@ const UserListData = ({ route }) => {
 
     //console.log(route.params.snap)
 
-    const [fireBaseSnap, setfireBaseSnap] = useState([{ name: "", list: "", key: "" }])
+    const [fireBaseSnap, setfireBaseSnap] = useState([])
 
     const auth = getAuth();
 
@@ -34,7 +34,7 @@ const UserListData = ({ route }) => {
                 let keyName = childSnapShot.key
                 let groceryList = data.GroceryList
                 let listName = data.listName
-                setfireBaseSnap((prevListOfItems) => [...prevListOfItems, { name: listName, list: groceryList.map(item => item.text), key: keyName }])
+                setfireBaseSnap((prevListOfItems) => [...prevListOfItems, { name: listName, list: groceryList, key: keyName }])
                 
             })
         })
@@ -43,13 +43,19 @@ const UserListData = ({ route }) => {
 
     let currentList = route.params.listName
 
-    let filteredList = fireBaseSnap.filter(item => item.name === currentList)
+    //console.log(fireBaseSnap)
+
+    let filteredList = fireBaseSnap.filter((item) => item.name === currentList)
 
     //(prevListOfItems) => [...prevListOfItems, newItem]
 
-    let items = filteredList.map(item => item.list)
+    //let items = filteredList.map(item => item.list)
 
-    console.log(items)
+    let arrayOfItems = filteredList.map(item => item.list.map(item => item.text))
+
+    let flatArray = [].concat(...arrayOfItems);
+
+    console.log(flatArray)
 
     //quick test code, item.list gives me list items, item.name gives me list names, but how do I get singular atributes from the list itself?
 
@@ -62,7 +68,7 @@ const UserListData = ({ route }) => {
                 <Text style={{ fontWeight: "bold", fontSize: 15, color: "black" }}>List Name: {route.params.listName} </Text>
             </View>
             <View >
-                {items.map((item) => {
+                {flatArray.map((item) => {
                     return (
                         <TouchableOpacity>
                             <Text>{item}</Text>
