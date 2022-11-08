@@ -17,7 +17,7 @@ const PersonalizedList = () => {
 
     const [FirebaseListNames, setFirebaseListNames] = useState([]) //this is actually list names
 
-    const [FirebaseSnap, setFirebaseSnap] = useState([{name: " ", list: " "}])
+    const [FirebaseSnap, setFirebaseSnap] = useState([])
 
     //const [FirebaseData, setFirebaseData] = useState([{listName: " ", listItems: }])
 
@@ -90,12 +90,13 @@ const PersonalizedList = () => {
         get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
             snapshot.forEach(childSnapShot => {
                 let data = childSnapShot.val()
+                let keyName = childSnapShot.key
                 let groceryList = data.GroceryList
                 let listName = data.listName
                 //console.log()
                 //console.log(groceryList.map(item => item.text))
                 //setFirebaseSnap(groceryList)
-                setFirebaseSnap({name: listName , list:groceryList})
+                setFirebaseSnap({name: listName , list:groceryList, docId: keyName})
                // console.log(FirebaseSnap.map(item => item.text))
             })
         })
@@ -137,7 +138,7 @@ const PersonalizedList = () => {
                 {FirebaseListNames.map((FirebaseListNames) => {
                     return (
                         <TouchableOpacity>
-                            <UserLists snap={FirebaseSnap} listNames={FirebaseListNames} />
+                            <UserLists snap={FirebaseSnap} listNames={FirebaseListNames}/>
                         </TouchableOpacity>
                     );
                 })}

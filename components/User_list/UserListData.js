@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useState, useEffect } from "react"
 import GroceryItem from "../App/GroceryItem"
