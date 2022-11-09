@@ -31,8 +31,6 @@ function UserLists(props) {
      Alert.alert("List was deleted successfully")
     }
 
-    console.log(props.snap.docId)
-
 
     return (
         <View style={styles.itemListStyles} >

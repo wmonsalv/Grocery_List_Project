@@ -77,6 +77,7 @@ const PersonalizedList = () => {
         get(child(dbRef, `users/${noSpecialCharacters}`)).then((snapshot) => {
             snapshot.forEach(childSnapShot => {
                 let data = childSnapShot.val()
+                let keyName = childSnapShot.key //gives me doc id
                 let listName = data.listName
                 let groceryList = data.GroceryList
                 setFirebaseListNames(current => [...current, listName])
@@ -84,6 +85,7 @@ const PersonalizedList = () => {
         })
 
     }, [])
+
 
     useEffect(() => { //I'm doing it for each, because it acts up when I do two state changes at once during a set state operation. This one is supposed to print out grocery items on each list.
 
