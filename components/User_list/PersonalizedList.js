@@ -8,6 +8,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import db from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 import UserLists from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/components/User_list/UserLists.js"
 
+//displays list names on the screen using a custom component
 
 const PersonalizedList = () => {
 
@@ -97,11 +98,13 @@ const PersonalizedList = () => {
                 //console.log(groceryList.map(item => item.text))
                 //setFirebaseSnap(groceryList)
                 setFirebaseSnap({name: listName , list:groceryList, docId: keyName})
-               // console.log(FirebaseSnap.map(item => item.text))
+                
             })
         })
 
     }, [])
+
+    console.log(FirebaseSnap)
 
     //console.log(FirebaseSnap) //-> prints out all grocery lists and the names attached to each list <important>
     

@@ -13,6 +13,8 @@ import UserGroceryItem from "/Users/william_x1/Documents/GitHub/expenses-app-mai
 //I'm using route.params.listName to circumvent passing data to a navigation function 
 //I'm still not understanding the syntax entirely, but I'm able to transfer the data just fine
 
+//what actually shows up when I click on the user list title on the list of list names page. This renders all food items on the list.
+
 const UserListData = ({ route }) => {
 
 
