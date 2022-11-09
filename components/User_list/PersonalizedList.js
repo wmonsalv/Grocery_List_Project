@@ -106,8 +106,6 @@ const PersonalizedList = () => {
 
     }, [])
 
-    console.log(FirebaseSnap)
-
     //console.log(FirebaseSnap) //-> prints out all grocery lists and the names attached to each list <important>
     
     // useEffect(() => { //gives me grocery list for a specific listName

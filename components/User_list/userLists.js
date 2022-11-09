@@ -5,13 +5,15 @@ import RemoveList from '../Icons/RemoveList';
 import firebase from "/Users/william_x1/Documents/GitHub/expenses-app-main/Grocery_List_Project/firebase.js"
 import { getDatabase, ref, child, get, remove } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //custom component that is rendered with the list title on the personalized list component 
 
 function UserLists(props) {
 
     const navigation = useNavigation()
+
+    const [fireBaseSnap, setFireBaseSnap] = useState([])
 
     const user = getAuth();
 
@@ -22,14 +24,43 @@ function UserLists(props) {
     const id = props.snap.docId //gives me current doc id
 
     //console.log(props.snap.docId)
+    
+
+    useEffect(() => { //I'm doing it for each, because it acts up when I do two state changes at once during a set state operation. This one is supposed to print out grocery items on each list.
+
+        const dbRef = ref(getDatabase());
+        get(child(dbRef, 'users/' + noSpecialCharacters)).then((snapshot) => {
+            snapshot.forEach(childSnapShot => {
+                let data = childSnapShot.val()
+                let keyName = childSnapShot.key
+                let groceryList = data.GroceryList
+                let listName = data.listName
+                setFireBaseSnap((prevListOfItems) => [...prevListOfItems, { name: listName, list: groceryList, key: keyName }])
+                
+            })
+        })
+
+    }, [])
+
+    console.log(fireBaseSnap)
+
+    let filteredList = fireBaseSnap.filter((item) => item.name === props.listNames) // All of these ops are done so that I can delete a doc based 
+
+    let objectArray = filteredList.map(item => item.key) 
+
+    let docId = objectArray[0]
+
+    console.log(docId)
 
     function deleteHandler(){
-    //  remove(ref(dbRef, `/${id}`)) < --- doesn't work
-    // remove(ref(db, 'users/' + noSpecialCharacters).child(id)) < --- doesn't work
-     const db = getDatabase();
-     remove(ref(db, 'users/' + noSpecialCharacters +  "/" + id)) // <-- this works (finally starting to get an idea of how to access documents in firebase)!!!
-     Alert.alert("List was deleted successfully")
-    }
+        //  remove(ref(dbRef, `/${id}`)) < --- doesn't work
+        // remove(ref(db, 'users/' + noSpecialCharacters).child(id)) < --- doesn't work
+         const db = getDatabase();
+         remove(ref(db, 'users/' + noSpecialCharacters +  "/" + docId)) // <-- this works (finally starting to get an idea of how to access documents in firebase)!!!
+         Alert.alert("List was deleted successfully")
+        }
+    console.log(props.listNames)
+
 
 
     return (
