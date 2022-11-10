@@ -50,17 +50,18 @@ function UserLists(props) {
 
     let docId = objectArray[0]
 
-    console.log(docId)
-
     function deleteHandler(){
         //  remove(ref(dbRef, `/${id}`)) < --- doesn't work
         // remove(ref(db, 'users/' + noSpecialCharacters).child(id)) < --- doesn't work
          const db = getDatabase();
          remove(ref(db, 'users/' + noSpecialCharacters +  "/" + docId)) // <-- this works (finally starting to get an idea of how to access documents in firebase)!!!
+         props.onDelete(props.listNames)
          Alert.alert("List was deleted successfully")
         }
-    console.log(props.listNames)
 
+    // function deleted(){
+    //     props.myDeleteFunc(props.listNames)
+    //     }
 
 
     return (

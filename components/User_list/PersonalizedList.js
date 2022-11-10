@@ -24,6 +24,10 @@ const PersonalizedList = () => {
 
     // const [itemsOnList, setItemsOnList] = useState([])
 
+    function deleteItemHandler(text) {
+        setFirebaseListNames(currentListOfItems => { return currentListOfItems.filter((item) => item !== text) })
+      }
+
     const handleSignOut = () => {
         auth
             .signOut()
@@ -141,7 +145,7 @@ const PersonalizedList = () => {
                 {FirebaseListNames.map((FirebaseListNames) => {
                     return (
                         <TouchableOpacity>
-                            <UserLists snap={FirebaseSnap} listNames={FirebaseListNames}/>
+                            <UserLists onDelete={deleteItemHandler} snap={FirebaseSnap} listNames={FirebaseListNames}/>
                         </TouchableOpacity>
                     );
                 })}
