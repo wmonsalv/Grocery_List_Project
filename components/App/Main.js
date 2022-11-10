@@ -126,7 +126,7 @@ useEffect(() => { //seems like useEffect works, but it only does it only works o
 
   function storingDataHandler() {
     if(currentUser == "No Active User"){
-      Alert.alert("Login or register to save your lists")
+      Alert.alert("Login or register to save your list")
     }
     else if(enteredTitle == ""){
       Alert.alert("please assign a title to your list")
