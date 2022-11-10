@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RemoveList from '../Icons/RemoveList';
 import SaveList from '../Icons/SaveList';
 import PlusCircle from '../Icons/PlusCircle';
@@ -16,13 +16,36 @@ function Main() {
 
   ])
 
-  const user = getAuth().currentUser;
+  //const user = getAuth().currentUser;
 
   const [placeholder, setPlaceHolder] = useState("Add Item to the list")
 
   const [enteredItemText, setEnteredItemText] = useState("")
 
   const [enteredTitle, setTitle] = useState("")
+
+  const [userStatus, setUserStatus] = useState(false)
+
+  const [currentUser, setCurrentUser] = useState("No Active User")
+
+  useEffect(() => {     //using useffect, I was able to mitigate how many times we are rendering the username to the screen
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            setUserStatus(true)
+            const uid = user.uid;
+            // ...
+        } else {
+            // User is signed out
+            setUserStatus(false)
+        }
+    })
+}, [])
+
+useEffect(() => { //seems like useEffect works, but it only does it only works on one state at a time 
+    if(userStatus){
+        setCurrentUser(auth.currentUser?.email) 
+    }
+}, [userStatus]) //I'm leaving the name of the userStatus inside the brackets becuase we want to rerender if there are changes on that variable
 
   function listInputHandler(enteredText) {
     setEnteredItemText(enteredText)
@@ -102,13 +125,24 @@ function Main() {
   }
 
   function storingDataHandler() {
-    const userEmail = auth.currentUser?.email
-    const noSpecialCharacters = userEmail.replace(/[^a-zA-Z0-9 ]/g, '');
+    if(currentUser == "No Active User"){
+      Alert.alert("Login or register to save your lists")
+    }
+    else if(enteredTitle == ""){
+      Alert.alert("please assign a title to your list")
+    }
+    else{
+    // const userEmail = auth.currentUser?.email
+    const noSpecialCharacters = currentUser.replace(/[^a-zA-Z0-9 ]/g, '');
     writeUserData(noSpecialCharacters, enteredTitle, listOfItems);
     setTitle("")
     setListofItems([])
     Alert.alert("List was saved successfully")
+    }
+    
   }
+
+  
 
 
 
