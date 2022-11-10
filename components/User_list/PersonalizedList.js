@@ -84,7 +84,7 @@ const PersonalizedList = () => {
                 let keyName = childSnapShot.key //gives me doc id
                 let listName = data.listName
                 let groceryList = data.GroceryList
-                setFirebaseListNames(current => [...current, listName])
+                setFirebaseListNames(current => [...current, {list:listName, id:keyName}])
             })
         })
 
@@ -145,7 +145,7 @@ const PersonalizedList = () => {
                 {FirebaseListNames.map((FirebaseListNames) => {
                     return (
                         <TouchableOpacity>
-                            <UserLists onDelete={deleteItemHandler} snap={FirebaseSnap} listNames={FirebaseListNames}/>
+                            <UserLists onDelete={deleteItemHandler} snap={FirebaseSnap} listNames={FirebaseListNames.list} keys={FirebaseListNames.id}/>
                         </TouchableOpacity>
                     );
                 })}

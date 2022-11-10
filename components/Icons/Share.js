@@ -4,7 +4,7 @@ import { mdiCellphoneNfc } from '@mdi/js';
 // check mark icon
 
 const Share = () => (
-  <Avatar.Icon size={35} icon={"cellphone-nfc"} color="white" backgroundColor="#27963C"/>
+  <Avatar.Icon size={35} icon={"cellphone-nfc"} color="#27963C" backgroundColor="white"/>
 );
 
 export default Share

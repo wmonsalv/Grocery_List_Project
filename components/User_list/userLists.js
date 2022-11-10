@@ -42,7 +42,6 @@ function UserLists(props) {
 
     }, [])
 
-    console.log(fireBaseSnap)
 
     let filteredList = fireBaseSnap.filter((item) => item.name === props.listNames) // All of these ops are done so that I can delete a doc based 
 
@@ -72,7 +71,7 @@ function UserLists(props) {
             <TouchableOpacity onPress={deleteHandler}>
             <RemoveList />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Share Screen", {listName: props.listNames, snap: props.snap, docId:props.keys})}>
             <Share/>
             </TouchableOpacity>
         </View>
